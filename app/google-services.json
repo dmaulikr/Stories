@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "450387225530",
+    "firebase_url": "https://sex-stories-15628.firebaseio.com",
+    "project_id": "sex-stories-15628",
+    "storage_bucket": "sex-stories-15628.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:450387225530:android:c699f9138dab2a7e",
+        "android_client_info": {
+          "package_name": "com.mkrworld.stories"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "450387225530-84v2b2igr3vbk7kd1daiehbkktj80lv6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfJ6KT6TtfCT_TSxUwL27TA21SEjAYHME"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

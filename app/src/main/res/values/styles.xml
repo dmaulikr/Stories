@@ -1,0 +1,20 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/status_bar_color</item>
+        <item name="colorAccent">@android:color/white</item>
+        <item name="android:textColorPrimary">@color/toolbar_primary_color</item>
+        <item name="android:textColorSecondary">@color/toolbar_secondary_color</item>
+    </style>
+
+    <!-- TOOLBAR STYLE -->
+    <style name="toolbar_dimen">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/toolbar_height</item>
+        <item name="android:background">@color/toolbar_back</item>
+    </style>
+
+</resources>
