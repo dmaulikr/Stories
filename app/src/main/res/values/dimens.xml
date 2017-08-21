@@ -6,6 +6,8 @@
     <!-- FRAGMENT HOME -->
     <dimen name="fragment_home_progress_margin">@dimen/mkrdp_5</dimen>
     <!-- ADAPTER STORY TITLE -->
-    <dimen name="adapter_story_title_text_size">@dimen/mkrdp_5</dimen>
-    <dimen name="adapter_story_title_outer_padding">@dimen/mkrdp_3</dimen>
+    <dimen name="adapter_story_title_text_size">@dimen/mkrdp_4.75</dimen>
+    <dimen name="adapter_story_title_outer_padding">@dimen/mkrdp_2</dimen>
+    <dimen name="adapter_story_text_size">@dimen/mkrdp_4.50</dimen>
+    <dimen name="adapter_story_outer_padding">@dimen/mkrdp_1</dimen>
 </resources>

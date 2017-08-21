@@ -1,9 +1,10 @@
-package com.mkrworld.stories.ui.adapter.viewholder;
+package com.mkrworld.stories.ui.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.mkrworld.stories.R;
+import com.mkrworld.stories.ui.adapter.viewholder.StoryTitleVH;
 
 
 /**

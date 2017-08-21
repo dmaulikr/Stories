@@ -1,8 +1,9 @@
 package com.mkrworld.stories.ui.activity;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.Toolbar;
 
 import com.mkrworld.stories.BuildConfig;
 import com.mkrworld.stories.R;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_search, menu);
+        getMenuInflater().inflate(R.menu.menu_story, menu);
         return true;
     }
 }

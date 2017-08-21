@@ -6,7 +6,8 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
-import com.mkrworld.sexstories.BuildConfig;
+import com.mkrworld.stories.BuildConfig;
+
 
 public class PreferenceDataUtils {
 

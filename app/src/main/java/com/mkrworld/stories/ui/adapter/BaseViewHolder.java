@@ -1,8 +1,7 @@
-package com.mkrworld.stories.ui.adapter.viewholder;
+package com.mkrworld.stories.ui.adapter;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
-import com.mkrworld.stories.ui.adapter.AdapterItem;
 
 /**
  * Created by himanshu on 08/09/15.

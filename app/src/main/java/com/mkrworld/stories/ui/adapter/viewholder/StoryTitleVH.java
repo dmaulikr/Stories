@@ -1,12 +1,11 @@
 package com.mkrworld.stories.ui.adapter.viewholder;
 
-import android.text.Html;
-import android.text.Spanned;
 import android.view.View;
 import android.widget.TextView;
 
 import com.mkrworld.stories.R;
 import com.mkrworld.stories.data.StoryTitleData;
+import com.mkrworld.stories.ui.adapter.BaseViewHolder;
 
 /**
  * Created by A1ZFKXA3 on 8/21/2017.
@@ -27,12 +26,6 @@ public class StoryTitleVH extends BaseViewHolder<StoryTitleData> {
     @Override
     protected void bindData(StoryTitleData storyTitleData) {
         mParentView.setTag(storyTitleData);
-        Spanned htmlText;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            htmlText = Html.fromHtml("<u>" + storyTitleData.getTitle() + "</u>", Html.FROM_HTML_MODE_LEGACY);
-        } else {
-            htmlText = Html.fromHtml("<u>" + storyTitleData.getTitle() + "</u>");
-        }
-        mTextViewStoryTitle.setText(htmlText);
+        mTextViewStoryTitle.setText(storyTitleData.getTitle());
     }
 }

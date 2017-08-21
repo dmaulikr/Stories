@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="status_bar_color">#303F9F</color>
-    <color name="toolbar_back">#3F51B5</color>
-    <color name="toolbar_primary_color">@android:color/white</color>
-    <color name="toolbar_secondary_color">@android:color/white</color>
+    <color name="status_bar_color">#280103</color>
+    <color name="toolbar_back">#280103</color>
+    <color name="toolbar_primary_color">#ffff02</color>
+    <color name="toolbar_secondary_color">#ffff02</color>
     <!-- FRAGMENT HOME -->
-    <color name="fragment_home_bg_color">#a7030e</color>
+    <color name="fragment_home_bg_color">#500107</color>
+    <!-- FRAGMENT STORY -->
+    <color name="fragment_story_bg_color">#500107</color>
     <!-- ADAPTER STORY TITLE -->
     <color name="adapter_story_title_text_color">#ffff02</color>
+    <!-- ADAPTER STORY -->
+    <color name="adapter_story_text_color">#ffff02</color>
 </resources>

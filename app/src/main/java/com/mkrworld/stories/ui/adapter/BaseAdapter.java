@@ -1,11 +1,10 @@
 package com.mkrworld.stories.ui.adapter;
 
+
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.mkrworld.stories.ui.adapter.viewholder.AdapterItemHandler;
-import com.mkrworld.stories.ui.adapter.viewholder.BaseViewHolder;
 
 import java.util.ArrayList;
 
@@ -16,6 +15,7 @@ public class BaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     private ArrayList<AdapterItem> mAdapterItemList;
     private BaseViewHolder.VHLongClickable longClickCallback;
     private BaseViewHolder.VHClickable clickCallback;
+    private boolean mIsUpdatingList;
 
     /**
      * Constructor
@@ -30,7 +30,7 @@ public class BaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
      * @param recyclerView           Pass to listen the Last Item Visible Count
      * @param onLoadMoreItemListener Callback to listen the load even
      */
-    public BaseAdapter(RecyclerView recyclerView, OnLoadMoreItemListener onLoadMoreItemListener) {
+    public BaseAdapter(final RecyclerView recyclerView, final OnLoadMoreItemListener onLoadMoreItemListener) {
         this();
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -41,6 +41,15 @@ public class BaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+                if (!mIsUpdatingList) {
+                    if (recyclerView.getChildCount() > 1) {
+                        int childAdapterPosition = recyclerView.getChildAdapterPosition(recyclerView.getChildAt(recyclerView.getChildCount() - 1));
+                        if (!(childAdapterPosition < (mAdapterItemList.size() - 1))) {
+                            mIsUpdatingList = true;
+                            onLoadMoreItemListener.onLoadMoreItemListener();
+                        }
+                    }
+                }
             }
         });
     }
@@ -103,6 +112,7 @@ public class BaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         if (list != null) {
             mAdapterItemList.addAll(list);
         }
+        mIsUpdatingList = false;
         notifyDataSetChanged();
     }
 
@@ -115,6 +125,7 @@ public class BaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         if (list != null) {
             mAdapterItemList.addAll(list);
         }
+        mIsUpdatingList = false;
         notifyDataSetChanged();
     }
 

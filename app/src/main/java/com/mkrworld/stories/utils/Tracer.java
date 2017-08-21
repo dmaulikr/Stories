@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import com.mkrworld.sexstories.BuildConfig;
 import com.mkrworld.stories.BuildConfig;
 
 import java.io.BufferedWriter;
