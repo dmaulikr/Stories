@@ -14,6 +14,9 @@ public class PreferenceDataUtils {
     private static final String TAG = BuildConfig.BASE_TAG + ".PreferenceDataUtils";
     private static final String STORE = "PREFERENCE_STORE";
     private static String LATEST_VER_CODE = "LATEST_VER_CODE";
+    private static String STORY_MAX_COUNT = "STORY_MAX_COUNT";
+    private static String STORY_MIN_COUNT = "STORY_MIN_COUNT";
+    private static String STORY_PAGE_COUNT = "STORY_PAGE_COUNT";
 
     //==================================================================================================================
     //==================================================================================================================
@@ -25,15 +28,15 @@ public class PreferenceDataUtils {
      * @param context
      * @return
      */
-    public static int getLatestVersionCode(Context context) {
-        Tracer.debug(TAG, "getLatestVersionCode()");
+    public static int getAppVersionCode(Context context) {
+        Tracer.debug(TAG, "getAppVersionCode()");
         try {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             return getShearedPreference(context).getInt(LATEST_VER_CODE, packageInfo.versionCode);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        return 0;
+        return 1;
     }
 
     /**
@@ -44,9 +47,72 @@ public class PreferenceDataUtils {
      */
     public static void setLatestVersion(Context context, int versionOnFirebase) {
         Tracer.debug(TAG, "setLatestVersion()" + versionOnFirebase);
-        if (versionOnFirebase > getLatestVersionCode(context)) {
+        if (versionOnFirebase > getAppVersionCode(context)) {
             getShearedPreferenceEditor(context).putInt(LATEST_VER_CODE, versionOnFirebase).commit();
         }
+    }
+
+    /**
+     * Method to get the story max count
+     *
+     * @param context
+     */
+    public static int getStoryMaxCount(Context context) {
+        Tracer.debug(TAG, "getStoryMaxCount()");
+        return getShearedPreference(context).getInt(STORY_MAX_COUNT, 0);
+    }
+
+    /**
+     * Method to set the story max count
+     *
+     * @param context
+     * @param storyMaxCount Story max count
+     */
+    public static void setStoryMaxCount(Context context, int storyMaxCount) {
+        Tracer.debug(TAG, "setStoryMaxCount()" + storyMaxCount);
+        getShearedPreferenceEditor(context).putInt(STORY_MAX_COUNT, storyMaxCount).commit();
+    }
+
+    /**
+     * Method to get the story min count
+     *
+     * @param context
+     */
+    public static int getStoryMinCount(Context context) {
+        Tracer.debug(TAG, "getStoryMinCount()");
+        return getShearedPreference(context).getInt(STORY_MIN_COUNT, 0);
+    }
+
+    /**
+     * Method to set the story min count
+     *
+     * @param context
+     * @param storyMinCount Story min count
+     */
+    public static void setStoryMinCount(Context context, int storyMinCount) {
+        Tracer.debug(TAG, "setStoryMinCount()" + storyMinCount);
+        getShearedPreferenceEditor(context).putInt(STORY_MIN_COUNT, storyMinCount).commit();
+    }
+
+    /**
+     * Method to get the story page count
+     *
+     * @param context
+     */
+    public static int getStoryPageCount(Context context) {
+        Tracer.debug(TAG, "getStoryPageCount()");
+        return getShearedPreference(context).getInt(STORY_PAGE_COUNT, 10);
+    }
+
+    /**
+     * Method to set the story page count
+     *
+     * @param context
+     * @param storyPageCount Story page count
+     */
+    public static void setStoryPageCount(Context context, int storyPageCount) {
+        Tracer.debug(TAG, "setStoryPageCount()" + storyPageCount);
+        getShearedPreferenceEditor(context).putInt(STORY_PAGE_COUNT, storyPageCount).commit();
     }
 
     //==================================================================================================================
