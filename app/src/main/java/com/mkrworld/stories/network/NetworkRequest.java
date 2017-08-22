@@ -68,21 +68,6 @@ public class NetworkRequest {
      *                                 server
      * @param flag                     This flag is returned in response weather success or failure
      */
-    public static void sendPostRequestBulk(final String url, JSONObject jsonObject, final OnNetworkRequestListener onNetworkRequestListener, final String flag) {
-        if (jsonObject != null) {
-            sendAsyncJsonRequest(POST, url, jsonObject, onNetworkRequestListener, flag);
-        }
-    }
-
-    /**
-     * Method to send post request to the server
-     *
-     * @param url                      Api on which hit
-     * @param jsonObject               json which is send to the server
-     * @param onNetworkRequestListener Listen to listen the status of sending the request to the
-     *                                 server
-     * @param flag                     This flag is returned in response weather success or failure
-     */
     public static void sendGetRequest(final String url, JSONObject jsonObject, final OnNetworkRequestListener onNetworkRequestListener, final String flag) {
         Tracer.debug(TAG, "NetworkRequest.sendGetRequest() URL: " + url);
         sendAsyncJsonRequest(GET, url, jsonObject, onNetworkRequestListener, flag);
