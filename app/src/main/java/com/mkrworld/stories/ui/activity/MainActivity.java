@@ -9,11 +9,12 @@ import android.view.Menu;
 import com.mkrworld.stories.BuildConfig;
 import com.mkrworld.stories.R;
 import com.mkrworld.stories.controller.AppPermissionController;
+import com.mkrworld.stories.controller.FetchAppConfigController;
 import com.mkrworld.stories.ui.fragment.FragmentHome;
 import com.mkrworld.stories.utils.Tracer;
 
 
-public class MainActivity extends AppCompatActivity implements AppPermissionController.OnAppPermissionControllerListener {
+public class MainActivity extends AppCompatActivity implements AppPermissionController.OnAppPermissionControllerListener, FetchAppConfigController.OnFetchAppConfigControllerListener {
     private static final String TAG = BuildConfig.BASE_TAG + ".MainActivity";
     private AppPermissionController mAppPermissionController;
 
@@ -45,6 +46,17 @@ public class MainActivity extends AppCompatActivity implements AppPermissionCont
     @Override
     public void onAppPermissionControllerListenerHaveAllRequiredPermission() {
         Tracer.debug(TAG, "onAppPermissionControllerListenerHaveAllRequiredPermission: ");
+        new FetchAppConfigController(this, this).fetchAppConfig();
+    }
+
+    @Override
+    public void onFetchAppConfigSuccess() {
+        Tracer.debug(TAG, "onFetchAppConfigSuccess: ");
         getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_fragment_container, new FragmentHome()).commit();
+    }
+
+    @Override
+    public void onFetchAppConfigFailed() {
+        Tracer.debug(TAG, "onFetchAppConfigFailed: ");
     }
 }

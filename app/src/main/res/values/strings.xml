@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Stories</string>
+    <string name="dialog_message_please_wait">Please wait.....</string>
 </resources>

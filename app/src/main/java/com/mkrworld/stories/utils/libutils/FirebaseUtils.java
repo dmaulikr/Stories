@@ -1,30 +1,27 @@
 package com.mkrworld.stories.utils.libutils;
 
-import android.content.Context;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mkrworld.stories.BuildConfig;
-import com.mkrworld.stories.utils.PreferenceDataUtils;
 import com.mkrworld.stories.utils.Tracer;
 
 /**
  * Class to handle firebase operation
  */
 public class FirebaseUtils {
+    public static final String APP_CONFIG = "app_config";
+    public static final String STORY_MAX_COUNT = "story_max_count";
+    public static final String STORY_MIN_COUNT = "story_min_count";
+    public static final String STORY_PAGE_COUNT = "story_page_count";
+    public static final String APP_VER = "app_ver";
+    public static final String STORY_LIST = "story_list";
+    public static final String TITLE = "title";
+    public static final String STORY = "story";
     private static FirebaseUtils mFirebaseUtils;
     private static final String TAG = BuildConfig.BASE_TAG + ".FirebaseUtils";
-    private static final String APP_CONFIG = "app_config";
-    private static final String STORY_MAX_COUNT = "story_max_count";
-    private static final String STORY_MIN_COUNT = "story_min_count";
-    private static final String STORY_PAGE_COUNT = "story_page_count";
-    private static final String APP_VER = "app_ver";
-    private static final String STORY_LIST = "story_list";
-    private static final String TITLE = "title";
-    private static final String STORY = "story";
 
     /**
      * Method to get the Instance of this class
@@ -60,7 +57,7 @@ public class FirebaseUtils {
      * @param storyId            Unique Id of the Story
      * @param onFirebaseListener Listen the callback
      */
-    public void fetchStoryTitle(final String storyId, final OnFirebaseListeer onFirebaseListener) {
+    public void fetchStoryTitle(final String storyId, final OnFirebaseListener onFirebaseListener) {
         Tracer.debug(TAG, "fetchStoryTitle()");
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference databaseReference = database.getReference(STORY_LIST).child(storyId);
@@ -70,13 +67,10 @@ public class FirebaseUtils {
                 Tracer.debug(TAG, "fetchStoryTitle().onDataChange() " + dataSnapshot.getValue());
                 try {
                     String title = (String) dataSnapshot.child(TITLE).getValue();
-                    if (onFirebaseListener != null) {
-                        onFirebaseListener.onFirebaseStoryFetchTitleSuccess(storyId, title);
-                    }
                 } catch (Exception e) {
                     Tracer.error(TAG, "fetchStoryTitle().onDataChange()" + e.getMessage());
                     if (onFirebaseListener != null) {
-                        onFirebaseListener.onFirebaseStoryFetchTitleFailed(storyId);
+                        onFirebaseListener.onFirebaseStoryFetchTitleFailed(storyId, e.getMessage());
                     }
                 }
             }
@@ -85,7 +79,7 @@ public class FirebaseUtils {
             public void onCancelled(DatabaseError databaseError) {
                 Tracer.debug(TAG, "fetchStoryTitle().onCancelled() " + databaseError.getMessage());
                 if (onFirebaseListener != null) {
-                    onFirebaseListener.onFirebaseStoryFetchTitleFailed(storyId);
+                    onFirebaseListener.onFirebaseStoryFetchTitleFailed(storyId, databaseError.getMessage());
                 }
             }
         });
@@ -97,7 +91,7 @@ public class FirebaseUtils {
      * @param storyId            Unique Id of the Story
      * @param onFirebaseListener Listen the callback
      */
-    public void fetchStory(final String storyId, final OnFirebaseListeer onFirebaseListener) {
+    public void fetchStory(final String storyId, final OnFirebaseListener onFirebaseListener) {
         Tracer.debug(TAG, "fetchStory()");
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference databaseReference = database.getReference(STORY_LIST).child(storyId);
@@ -107,13 +101,10 @@ public class FirebaseUtils {
                 Tracer.debug(TAG, "fetchStory().onDataChange() " + dataSnapshot.getValue());
                 try {
                     String title = (String) dataSnapshot.child(TITLE).getValue();
-                    if (onFirebaseListener != null) {
-                        onFirebaseListener.onFirebaseStoryFetchTitleSuccess(storyId, title);
-                    }
                 } catch (Exception e) {
                     Tracer.error(TAG, "fetchStory().onDataChange()" + e.getMessage());
                     if (onFirebaseListener != null) {
-                        onFirebaseListener.onFirebaseStoryFetchTitleFailed(storyId);
+                        onFirebaseListener.onFirebaseStoryFetchTitleFailed(storyId, e.getMessage());
                     }
                 }
             }
@@ -122,7 +113,7 @@ public class FirebaseUtils {
             public void onCancelled(DatabaseError databaseError) {
                 Tracer.debug(TAG, "fetchStory().onCancelled() " + databaseError.getMessage());
                 if (onFirebaseListener != null) {
-                    onFirebaseListener.onFirebaseStoryFetchTitleFailed(storyId);
+                    onFirebaseListener.onFirebaseStoryFetchTitleFailed(storyId, databaseError.getMessage());
                 }
             }
         });
@@ -131,44 +122,16 @@ public class FirebaseUtils {
     /**
      * Method to get the app version from play store
      *
-     * @param context
      * @param onFirebaseListener
      */
-    public void getAppConfig(final Context context, final OnFirebaseListeer onFirebaseListener) {
+    public void getAppConfig(final OnFirebaseListener onFirebaseListener) {
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(APP_CONFIG);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Tracer.debug(TAG, "getAppConfig().onDataChange() " + dataSnapshot.getValue());
-                try {
-                    long appVer = (Long) dataSnapshot.child(APP_VER).getValue();
-                    PreferenceDataUtils.setLatestVersion(context, (int) appVer);
-                } catch (Exception e) {
-                    Tracer.error(TAG, "getAppConfig().onDataChange(APP_VER)" + e.getMessage());
-                }
-                try {
-                    long appVer = (Long) dataSnapshot.child(STORY_MAX_COUNT).getValue();
-                    PreferenceDataUtils.setStoryMaxCount(context, (int) appVer);
-                } catch (Exception e) {
-                    Tracer.error(TAG, "getAppConfig().onDataChange(STORY_MAX_COUNT)" + e.getMessage());
-                }
-                try {
-                    long appVer = (Long) dataSnapshot.child(STORY_MIN_COUNT).getValue();
-                    PreferenceDataUtils.setStoryMinCount(context, (int) appVer);
-                } catch (Exception e) {
-                    Tracer.error(TAG, "getAppConfig().onDataChange(STORY_MIN_COUNT)" + e.getMessage());
-                }
-                try {
-                    long appVer = (Long) dataSnapshot.child(STORY_PAGE_COUNT).getValue();
-                    PreferenceDataUtils.setStoryPageCount(context, (int) appVer);
-                } catch (Exception e) {
-                    Tracer.error(TAG, "getAppConfig().onDataChange(STORY_PAGE_COUNT)" + e.getMessage());
-                }
+                Tracer.debug(TAG, "getAppConfig().onDataChange() ");
                 if (onFirebaseListener != null) {
-                    onFirebaseListener.onFirebaseConfigFetchSuccess();
-                }
-                if (onFirebaseListener != null) {
-                    onFirebaseListener.onFirebaseConfigFetchSuccess();
+                    onFirebaseListener.onFirebaseConfigFetchSuccess(dataSnapshot);
                 }
             }
 
@@ -176,7 +139,7 @@ public class FirebaseUtils {
             public void onCancelled(DatabaseError databaseError) {
                 Tracer.debug(TAG, "getAppConfig().onCancelled() " + databaseError.getMessage());
                 if (onFirebaseListener != null) {
-                    onFirebaseListener.onFirebaseConfigFetchFailed();
+                    onFirebaseListener.onFirebaseConfigFetchFailed(databaseError.getMessage());
                 }
             }
         });
@@ -185,30 +148,30 @@ public class FirebaseUtils {
     /**
      * Callback for notify when data is fetched from fire base
      */
-    public interface OnFirebaseListeer {
+    public interface OnFirebaseListener {
         /**
          * Method to notify that Story title fetched from the server
          *
          * @param id    Unique story ID
-         * @param title Title of story
+         * @param dataSnapshot Title of story
          */
-        public void onFirebaseStoryFetchTitleSuccess(String id, String title);
+        public void onFirebaseStoryFetchTitleSuccess(String id, DataSnapshot dataSnapshot);
 
         /**
          * Method to notify that fetching story title failed
          *
          * @param id Unique Id of the Story
          */
-        public void onFirebaseStoryFetchTitleFailed(String id);
+        public void onFirebaseStoryFetchTitleFailed(String id, String error);
 
         /**
          * Method to notify that config fetch successfully
          */
-        public void onFirebaseConfigFetchSuccess();
+        public void onFirebaseConfigFetchSuccess(DataSnapshot dataSnapshot);
 
         /**
          * Method to notify that config fetch Failed
          */
-        public void onFirebaseConfigFetchFailed();
+        public void onFirebaseConfigFetchFailed(String error);
     }
 }

@@ -57,7 +57,6 @@ public class FragmentHome extends Fragment implements BaseViewHolder.VHClickable
     @Override
     public void onViewHolderClicked(BaseViewHolder holder, View view) {
         Tracer.debug(TAG, "onViewHolderClicked: ");
-        Tracer.showToastProduction(getActivity(), view.getTag().toString(), true);
     }
 
     @Override

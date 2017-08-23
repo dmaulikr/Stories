@@ -52,6 +52,6 @@ public class FragmentStory extends Fragment implements BaseViewHolder.VHClickabl
     @Override
     public void onViewHolderClicked(BaseViewHolder holder, View view) {
         Tracer.debug(TAG, "onViewHolderClicked: ");
-        Tracer.showToastProduction(getActivity(), view.getTag().toString(), true);
+        Tracer.showSnack(getActivity(), view.getTag().toString());
     }
 }
