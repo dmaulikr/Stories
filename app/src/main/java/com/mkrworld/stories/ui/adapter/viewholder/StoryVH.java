@@ -11,21 +11,20 @@ import com.mkrworld.stories.ui.adapter.BaseViewHolder;
  * Created by A1ZFKXA3 on 8/21/2017.
  */
 
-public class StoryTitleVH extends BaseViewHolder<StoryData> {
+public class StoryVH extends BaseViewHolder<StoryData> {
 
     private TextView mTextViewStoryTitle;
-    private View mParentView;
+    private TextView mTextViewStory;
 
-    public StoryTitleVH(View itemView) {
+    public StoryVH(View itemView) {
         super(itemView);
-        mTextViewStoryTitle = (TextView) itemView.findViewById(R.id.adapter_story_title_textView_story_title);
-        mParentView = itemView.findViewById(R.id.adapter_story_title_parent);
-        mParentView.setOnClickListener(this);
+        mTextViewStoryTitle = (TextView) itemView.findViewById(R.id.adapter_story_textView_story_title);
+        mTextViewStory = (TextView) itemView.findViewById(R.id.adapter_story_textView_story);
     }
 
     @Override
     protected void bindData(StoryData storyData) {
-        mParentView.setTag(storyData);
         mTextViewStoryTitle.setText(storyData.getTitle());
+        mTextViewStory.setText(storyData.getDescription());
     }
 }

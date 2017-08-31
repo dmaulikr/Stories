@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * Created by A1ZFKXA3 on 8/18/2017.
  */
 
-public class FragmentStory extends FragmentRecyclerView implements FetchStoryContentController.OnFetchStoryContentControllerListener {
+public class FragmentWebStory extends FragmentRecyclerView implements FetchStoryContentController.OnFetchStoryContentControllerListener {
     public static final String EXTRA_STORY_ID = "EXTRA_STORY_ID";
     public static final String EXTRA_STORY_TITLE = "EXTRA_STORY_TITLE";
     private static final String TAG = BuildConfig.BASE_TAG + ".FragmentStory";
@@ -59,7 +59,6 @@ public class FragmentStory extends FragmentRecyclerView implements FetchStoryCon
     @Override
     public void onFetchStoryContentFailed(String id, String error) {
         Tracer.debug(TAG, "onFetchStoryContentFailed: ");
-        hideProgress();
         Tracer.showSnack(getRecyclerView(), error);
     }
 }

@@ -1,7 +1,5 @@
 package com.mkrworld.stories.utils;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -111,7 +109,7 @@ public class Tracer {
      * @param text The text to show.  Can be formatted text.
      */
     public static void showSnack(View view, String text) {
-        Snackbar.make(view, text, Snackbar.LENGTH_LONG);
+        Snackbar.make(view, text, Snackbar.LENGTH_LONG).show();
     }
 
     /**
@@ -121,30 +119,6 @@ public class Tracer {
      * @param textResId The text Res Id to show.
      */
     public static void showSnack(View view, int textResId) {
-        Snackbar.make(view, textResId, Snackbar.LENGTH_LONG);
-    }
-
-    /**
-     * Show SNACK<br>
-     *
-     * @param context Context of the Activity.
-     * @param text    The text to show.  Can be formatted text.
-     */
-    public static void showSnack(Context context, String text) {
-        if (context instanceof Activity) {
-            showSnack(((Activity) context).getWindow().getDecorView().findViewById(android.R.id.content), text);
-        }
-    }
-
-    /**
-     * Show SNACK<br>
-     *
-     * @param context   Context of the Activity.
-     * @param textResId The text Res Id to show.
-     */
-    public static void showSnack(Context context, int textResId) {
-        if (context instanceof Activity) {
-            showSnack(((Activity) context).getWindow().getDecorView().findViewById(android.R.id.content), textResId);
-        }
+        Snackbar.make(view, textResId, Snackbar.LENGTH_LONG).show();
     }
 }

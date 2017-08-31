@@ -6,6 +6,7 @@ import android.content.Context;
 import com.google.firebase.database.DataSnapshot;
 import com.mkrworld.stories.BuildConfig;
 import com.mkrworld.stories.R;
+import com.mkrworld.stories.utils.ConnectivityInfoUtils;
 import com.mkrworld.stories.utils.PreferenceDataUtils;
 import com.mkrworld.stories.utils.Tracer;
 import com.mkrworld.stories.utils.libutils.FirebaseUtils;
@@ -19,7 +20,7 @@ import static com.mkrworld.stories.utils.libutils.FirebaseUtils.STORY_PAGE_COUNT
  * Created by A1ZFKXA3 on 8/23/2017.
  */
 
-public class FetchAppConfigController implements FirebaseUtils.OnFirebaseListener {
+public class FetchAppConfigController implements FirebaseUtils.OnFirebaseListener, ConnectivityInfoUtils.OnConnectivityInfoUtilsListener {
     private static final String TAG = BuildConfig.BASE_TAG + ".FetchAppConfigController";
     private Context mContext;
     private OnFetchAppConfigControllerListener mOnFetchAppConfigControllerListener;
@@ -45,17 +46,17 @@ public class FetchAppConfigController implements FirebaseUtils.OnFirebaseListene
      */
     public void fetchAppConfig() {
         mProgressDialog.show();
-        FirebaseUtils.getInstance().getAppConfig(this);
+        ConnectivityInfoUtils.isConnected(mContext, this);
     }
 
     @Override
-    public void onFirebaseStoryFetchTitleSuccess(String id, DataSnapshot dataSnapshot) {
-        Tracer.debug(TAG, "onFirebaseStoryFetchTitleSuccess: ");
+    public void onFirebaseStoryFetchStoryDataSuccess(String id, DataSnapshot dataSnapshot) {
+        Tracer.debug(TAG, "onFirebaseStoryFetchStoryDataSuccess: ");
     }
 
     @Override
-    public void onFirebaseStoryFetchTitleFailed(String id, String error) {
-        Tracer.debug(TAG, "onFirebaseStoryFetchTitleFailed: ");
+    public void onFirebaseStoryFetchStoryDataFailed(String id, String error) {
+        Tracer.debug(TAG, "onFirebaseStoryFetchStoryDataFailed: ");
     }
 
     @Override
@@ -63,25 +64,25 @@ public class FetchAppConfigController implements FirebaseUtils.OnFirebaseListene
         Tracer.debug(TAG, "onFirebaseConfigFetchSuccess: ");
         mProgressDialog.dismiss();
         try {
-            int appVer = (Integer) dataSnapshot.child(APP_VER).getValue();
+            int appVer = Integer.parseInt("" + dataSnapshot.child(APP_VER).getValue());
             PreferenceDataUtils.setLatestVersion(mContext, appVer);
         } catch (Exception e) {
             Tracer.error(TAG, "onFirebaseConfigFetchSuccess(APP_VER)" + e.getMessage());
         }
         try {
-            int maxCount = (Integer) dataSnapshot.child(STORY_MAX_COUNT).getValue();
+            int maxCount = Integer.parseInt("" + dataSnapshot.child(STORY_MAX_COUNT).getValue());
             PreferenceDataUtils.setStoryMaxCount(mContext, maxCount);
         } catch (Exception e) {
             Tracer.error(TAG, "onFirebaseConfigFetchSuccess(STORY_MAX_COUNT)" + e.getMessage());
         }
         try {
-            int minCount = (Integer) dataSnapshot.child(STORY_MIN_COUNT).getValue();
+            int minCount = Integer.parseInt("" + dataSnapshot.child(STORY_MIN_COUNT).getValue());
             PreferenceDataUtils.setStoryMinCount(mContext, minCount);
         } catch (Exception e) {
             Tracer.error(TAG, "onFirebaseConfigFetchSuccess(STORY_MIN_COUNT)" + e.getMessage());
         }
         try {
-            int pageCount = (Integer) dataSnapshot.child(STORY_PAGE_COUNT).getValue();
+            int pageCount = Integer.parseInt("" + dataSnapshot.child(STORY_PAGE_COUNT).getValue());
             PreferenceDataUtils.setStoryPageCount(mContext, pageCount);
         } catch (Exception e) {
             Tracer.error(TAG, "onFirebaseConfigFetchSuccess(STORY_PAGE_COUNT)" + e.getMessage());
@@ -95,10 +96,21 @@ public class FetchAppConfigController implements FirebaseUtils.OnFirebaseListene
     public void onFirebaseConfigFetchFailed(String error) {
         Tracer.debug(TAG, "onFirebaseConfigFetchFailed: ");
         mProgressDialog.dismiss();
-        Tracer.showSnack(mContext, error);
         if (mOnFetchAppConfigControllerListener != null) {
-            mOnFetchAppConfigControllerListener.onFetchAppConfigFailed();
+            mOnFetchAppConfigControllerListener.onFetchAppConfigFailed(error);
         }
+    }
+
+    @Override
+    public void onConnectivityInfoUtilsNetworkConnected() {
+        Tracer.debug(TAG, "onConnectivityInfoUtilsNetworkConnected: ");
+        FirebaseUtils.getInstance().getAppConfig(this);
+    }
+
+    @Override
+    public void onConnectivityInfoUtilsNetworkDisconnected() {
+        Tracer.debug(TAG, "onConnectivityInfoUtilsNetworkDisconnected: ");
+        onFirebaseConfigFetchFailed(mContext.getString(R.string.no_network_connection));
     }
 
     /**
@@ -112,8 +124,9 @@ public class FetchAppConfigController implements FirebaseUtils.OnFirebaseListene
 
         /**
          * Method called when Fetching App Config process failed
+         * @param errorMessage
          */
-        public void onFetchAppConfigFailed();
+        public void onFetchAppConfigFailed(String errorMessage);
     }
 
 }

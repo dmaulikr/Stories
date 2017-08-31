@@ -30,8 +30,7 @@ public class BaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
      * @param recyclerView           Pass to listen the Last Item Visible Count
      * @param onLoadMoreItemListener Callback to listen the load even
      */
-    public BaseAdapter(final RecyclerView recyclerView, final OnLoadMoreItemListener onLoadMoreItemListener) {
-        this();
+    public void setOnLoadMoreListener(final RecyclerView recyclerView, final OnLoadMoreItemListener onLoadMoreItemListener) {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -98,7 +97,7 @@ public class BaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
      * @param position
      * @return
      */
-    private AdapterItem getItem(int position) {
+    public AdapterItem getItem(int position) {
         return mAdapterItemList.get(position);
     }
 

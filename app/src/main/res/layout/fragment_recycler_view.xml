@@ -7,17 +7,17 @@
     android:orientation="vertical">
 
     <com.mkrworld.stories.ui.custom.MKRRecyclerView
-        android:id="@+id/fragment_home_recycler_view"
+        android:id="@+id/fragment_recycler_view_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <ProgressBar
-        android:id="@+id/fragment_home_progress"
+        android:id="@+id/fragment_recycler_vew_progress"
         style="@android:style/Widget.Holo.Light.ProgressBar.Inverse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="@color/toolbar_back"
-        android:visibility="gone"
-        android:layout_alignParentBottom="true" />
+        android:visibility="gone" />
 
 </RelativeLayout>

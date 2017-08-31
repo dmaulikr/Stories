@@ -8,6 +8,9 @@
     <!-- ADAPTER STORY TITLE -->
     <dimen name="adapter_story_title_text_size">@dimen/mkrdp_4.75</dimen>
     <dimen name="adapter_story_title_outer_padding">@dimen/mkrdp_2</dimen>
-    <dimen name="adapter_story_text_size">@dimen/mkrdp_4.50</dimen>
+    <dimen name="adapter_story_title_left_margin">@dimen/mkrdp_2</dimen>
+    <dimen name="adapter_story_text_size_content">@dimen/mkrdp_4.50</dimen>
+    <dimen name="adapter_story_text_size_title">@dimen/mkrdp_6</dimen>
+    <dimen name="adapter_story_content_margin">@dimen/mkrdp_10</dimen>
     <dimen name="adapter_story_outer_padding">@dimen/mkrdp_1</dimen>
 </resources>
