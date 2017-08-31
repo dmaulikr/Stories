@@ -5,6 +5,10 @@ def TRUE = "true"
 def FALSE = "false"
 def BASE_TAG = "BASE_TAG"
 def SHOW_LOG = "SHOW_LOG";
+def INPUT_TYPE_TEXT = "INPUT_TYPE_TEXT"
+def TEXT = "\"TEXT\""
+def INPUT_TYPE_WEB = "INPUT_TYPE_WEB"
+def WEB = "\"WEB\""
 
 android {
     compileSdkVersion 25
@@ -22,6 +26,8 @@ android {
             buildConfigField STRING, BASE_TAG, "\"MkrWorld.SexStories\""
             buildConfigField BOOLEAN, SHOW_LOG, FALSE
             buildConfigField STRING, BASE_TAG, "\"MkrWorld.SexStories\""
+            buildConfigField STRING, INPUT_TYPE_TEXT, TEXT
+            buildConfigField STRING, INPUT_TYPE_WEB, WEB
             buildConfigField BOOLEAN, SHOW_LOG, TRUE
         }
         release {

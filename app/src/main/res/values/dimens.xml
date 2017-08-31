@@ -5,7 +5,7 @@
     <dimen name="banner_margin">@dimen/mkrdp_0.50</dimen>
     <!-- FRAGMENT HOME -->
     <dimen name="fragment_home_progress_margin">@dimen/mkrdp_5</dimen>
-    <!-- ADAPTER STORY TITLE -->
+    <!-- ADAPTER STORY_TEXT TITLE -->
     <dimen name="adapter_story_title_text_size">@dimen/mkrdp_4.75</dimen>
     <dimen name="adapter_story_title_outer_padding">@dimen/mkrdp_2</dimen>
     <dimen name="adapter_story_title_left_margin">@dimen/mkrdp_2</dimen>

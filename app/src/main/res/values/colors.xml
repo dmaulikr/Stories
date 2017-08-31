@@ -8,10 +8,10 @@
 
     <!-- FRAGMENT HOME -->
     <color name="fragment_home_bg_color">#EEEEEE</color>
-    <!-- FRAGMENT STORY -->
+    <!-- FRAGMENT STORY_TEXT -->
     <color name="fragment_story_bg_color">#EEEEEE</color>
-    <!-- ADAPTER STORY TITLE -->
+    <!-- ADAPTER STORY_TEXT TITLE -->
     <color name="adapter_story_title_text_color">@android:color/black</color>
-    <!-- ADAPTER STORY -->
+    <!-- ADAPTER STORY_TEXT -->
     <color name="adapter_story_text_color">@android:color/black</color>
 </resources>

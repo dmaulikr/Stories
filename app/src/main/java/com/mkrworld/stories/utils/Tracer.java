@@ -105,7 +105,7 @@ public class Tracer {
     /**
      * Show SNACK<br>
      *
-     * @param view The view to find a parent from.
+     * @param view The view to find a mParent from.
      * @param text The text to show.  Can be formatted text.
      */
     public static void showSnack(View view, String text) {
@@ -115,7 +115,7 @@ public class Tracer {
     /**
      * Show SNACK<br>
      *
-     * @param view      The view to find a parent from.
+     * @param view      The view to find a mParent from.
      * @param textResId The text Res Id to show.
      */
     public static void showSnack(View view, int textResId) {

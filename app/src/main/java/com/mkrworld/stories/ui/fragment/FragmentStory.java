@@ -21,7 +21,6 @@ import java.util.ArrayList;
 
 public class FragmentStory extends FragmentRecyclerView implements FetchStoryContentController.OnFetchStoryContentControllerListener {
     public static final String EXTRA_STORY_ID = "EXTRA_STORY_ID";
-    public static final String EXTRA_STORY_TITLE = "EXTRA_STORY_TITLE";
     private static final String TAG = BuildConfig.BASE_TAG + ".FragmentStory";
 
     @Override
@@ -50,7 +49,12 @@ public class FragmentStory extends FragmentRecyclerView implements FetchStoryCon
     public void onFetchStoryContentSuccess(StoryData storyData) {
         Tracer.debug(TAG, "onFetchStoryContentSuccess: ");
         hideProgress();
-        AdapterItem storyDataAdapterItem = new AdapterItem(AdapterItemHandler.AdapterItemViewType.STORY, storyData);
+        AdapterItem storyDataAdapterItem = null;
+        if (storyData.getInputType().equalsIgnoreCase(BuildConfig.INPUT_TYPE_WEB)) {
+            storyDataAdapterItem = new AdapterItem(AdapterItemHandler.AdapterItemViewType.STORY_WEB, storyData);
+        } else {
+            storyDataAdapterItem = new AdapterItem(AdapterItemHandler.AdapterItemViewType.STORY_TEXT, storyData);
+        }
         ArrayList<AdapterItem> storyDataArrayList = new ArrayList<>();
         storyDataArrayList.add(storyDataAdapterItem);
         getBaseAdapter().updateAdapterItemList(storyDataArrayList);

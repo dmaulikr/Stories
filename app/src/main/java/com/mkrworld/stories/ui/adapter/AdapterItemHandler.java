@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import com.mkrworld.stories.R;
 import com.mkrworld.stories.ui.adapter.viewholder.StoryTitleVH;
 import com.mkrworld.stories.ui.adapter.viewholder.StoryVH;
+import com.mkrworld.stories.ui.adapter.viewholder.StoryWebVH;
 
 
 /**
@@ -15,7 +16,7 @@ public class AdapterItemHandler {
     private static AdapterItemViewType[] ENUM_VALUES;
 
     public enum AdapterItemViewType {
-        NONE, STORY_TITLES, STORY;
+        NONE, STORY_TITLES, STORY_TEXT, STORY_WEB;
     }
 
     public static BaseViewHolder createHolder(LayoutInflater inflater, ViewGroup parent, int viewType) {
@@ -25,8 +26,10 @@ public class AdapterItemHandler {
         switch (ENUM_VALUES[viewType]) {
             case STORY_TITLES:
                 return new StoryTitleVH(inflater.inflate(R.layout.adapter_story_title, parent, false));
-            case STORY:
+            case STORY_TEXT:
                 return new StoryVH(inflater.inflate(R.layout.adapter_story, parent, false));
+            case STORY_WEB:
+                return new StoryWebVH(inflater.inflate(R.layout.adapter_web, parent, false));
         }
         return null;
     }

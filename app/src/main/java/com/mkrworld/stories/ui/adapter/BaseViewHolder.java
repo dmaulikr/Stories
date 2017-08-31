@@ -8,18 +8,18 @@ import android.view.View;
  */
 public abstract class BaseViewHolder<V> extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-    protected View parent;
-    private VHClickable clickCallback;
-    private VHLongClickable longClickCallback;
+    protected View mParent;
+    private VHClickable mClickCallback;
+    private VHLongClickable mLongClickCallback;
     private AdapterItem mAdapterItem;
 
     public BaseViewHolder(View itemView) {
         super(itemView);
-        parent = itemView;
+        mParent = itemView;
     }
 
-    public View getParent() {
-        return parent;
+    public View getmParent() {
+        return mParent;
     }
 
     public void bindFeedItem(AdapterItem<V> adapterItem) {
@@ -35,13 +35,13 @@ public abstract class BaseViewHolder<V> extends RecyclerView.ViewHolder implemen
 
     @Override
     public void onClick(View v) {
-        if (clickCallback != null) clickCallback.onViewHolderClicked(this, v);
+        if (mClickCallback != null) mClickCallback.onViewHolderClicked(this, v);
     }
 
     @Override
     public boolean onLongClick(View v) {
-        if (longClickCallback != null) {
-            longClickCallback.onViewHolderLongClicked(this, v);
+        if (mLongClickCallback != null) {
+            mLongClickCallback.onViewHolderLongClicked(this, v);
             return true;
         }
         return false;
@@ -52,7 +52,7 @@ public abstract class BaseViewHolder<V> extends RecyclerView.ViewHolder implemen
      * @param callback
      */
     public void setVHClickCallback(VHClickable callback) {
-        clickCallback = callback;
+        mClickCallback = callback;
     }
 
     /**
@@ -60,7 +60,7 @@ public abstract class BaseViewHolder<V> extends RecyclerView.ViewHolder implemen
      * @param callback
      */
     public void setVHLongClickCallback(VHLongClickable callback) {
-        longClickCallback = callback;
+        mLongClickCallback = callback;
     }
 
     /**
