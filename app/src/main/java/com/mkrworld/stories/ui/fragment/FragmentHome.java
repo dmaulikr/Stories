@@ -58,7 +58,7 @@ public class FragmentHome extends FragmentRecyclerView implements BaseAdapter.On
                 int currentIndex = PreferenceDataUtils.getStoryMaxCount(getContext());
                 int minIndex = PreferenceDataUtils.getStoryMinCount(getContext());
                 int pageCount = PreferenceDataUtils.getStoryPageCount(getContext());
-                String id = ((StoryData) item.getBindingData()).getId();
+                String id = ((StoryData) item.getBindingData()).getId().replace(BuildConfig.STORY_KEY_PRE_TAG, "").trim();
                 try {
                     currentIndex = Integer.parseInt(id);
                 } catch (Exception e) {
@@ -84,6 +84,7 @@ public class FragmentHome extends FragmentRecyclerView implements BaseAdapter.On
     public void onFetchPageStoryFailed(String error) {
         Tracer.debug(TAG, "onFetchPageStoryFailed: ");
         hideProgress();
+        Tracer.showSnack(getRecyclerView(), error);
     }
 
     /**

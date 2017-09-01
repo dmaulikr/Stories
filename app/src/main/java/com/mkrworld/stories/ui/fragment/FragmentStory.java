@@ -21,22 +21,27 @@ import java.util.ArrayList;
 
 public class FragmentStory extends FragmentRecyclerView implements FetchStoryContentController.OnFetchStoryContentControllerListener {
     public static final String EXTRA_STORY_ID = "EXTRA_STORY_ID";
+    public static final String EXTRA_STORY_URL = "EXTRA_STORY_URL";
     private static final String TAG = BuildConfig.BASE_TAG + ".FragmentStory";
+    private static final String DEFAULT_STORY_ID = "DEFAULT_STORY_ID";
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         Tracer.debug(TAG, "onViewCreated: ");
         super.onViewCreated(view, savedInstanceState);
         showProgress();
-        String pageId = "";
-        if (getArguments() != null) {
-            pageId = getArguments().getString(EXTRA_STORY_ID, "").trim();
-        }
-        if (pageId.isEmpty()) {
+        if (getArguments() == null) {
             getActivity().onBackPressed();
             return;
         }
-        new FetchStoryContentController(getContext(), pageId, this).fetchStoryContent();
+        if (!getArguments().getString(EXTRA_STORY_ID, "").trim().isEmpty()) {
+            String pageId = getArguments().getString(EXTRA_STORY_ID, "").trim();
+            new FetchStoryContentController(getContext(), pageId, this).fetchStoryContent();
+        } else if (!getArguments().getString(EXTRA_STORY_URL, "").trim().isEmpty()) {
+            String url = getArguments().getString(EXTRA_STORY_URL, "").trim();
+        } else {
+            getActivity().onBackPressed();
+        }
     }
 
     @Override
@@ -49,15 +54,11 @@ public class FragmentStory extends FragmentRecyclerView implements FetchStoryCon
     public void onFetchStoryContentSuccess(StoryData storyData) {
         Tracer.debug(TAG, "onFetchStoryContentSuccess: ");
         hideProgress();
-        AdapterItem storyDataAdapterItem = null;
         if (storyData.getInputType().equalsIgnoreCase(BuildConfig.INPUT_TYPE_WEB)) {
-            storyDataAdapterItem = new AdapterItem(AdapterItemHandler.AdapterItemViewType.STORY_WEB, storyData);
+            loadWebStory(storyData);
         } else {
-            storyDataAdapterItem = new AdapterItem(AdapterItemHandler.AdapterItemViewType.STORY_TEXT, storyData);
+            loadTextStory(storyData);
         }
-        ArrayList<AdapterItem> storyDataArrayList = new ArrayList<>();
-        storyDataArrayList.add(storyDataAdapterItem);
-        getBaseAdapter().updateAdapterItemList(storyDataArrayList);
     }
 
     @Override
@@ -65,5 +66,25 @@ public class FragmentStory extends FragmentRecyclerView implements FetchStoryCon
         Tracer.debug(TAG, "onFetchStoryContentFailed: ");
         hideProgress();
         Tracer.showSnack(getRecyclerView(), error);
+    }
+
+    /**
+     * Method to load the Text Story
+     */
+    private void loadTextStory(StoryData storyData) {
+        AdapterItem storyDataAdapterItem = new AdapterItem(AdapterItemHandler.AdapterItemViewType.STORY_TEXT, storyData);
+        ArrayList<AdapterItem> storyDataArrayList = new ArrayList<>();
+        storyDataArrayList.add(storyDataAdapterItem);
+        getBaseAdapter().updateAdapterItemList(storyDataArrayList);
+    }
+
+    /**
+     * Method to load the Web Story
+     */
+    private void loadWebStory(StoryData storyData) {
+        AdapterItem storyDataAdapterItem = new AdapterItem(AdapterItemHandler.AdapterItemViewType.STORY_WEB, storyData);
+        ArrayList<AdapterItem> storyDataArrayList = new ArrayList<>();
+        storyDataArrayList.add(storyDataAdapterItem);
+        getBaseAdapter().updateAdapterItemList(storyDataArrayList);
     }
 }

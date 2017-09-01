@@ -3,6 +3,7 @@ package com.mkrworld.stories.ui.adapter.viewholder;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -28,18 +29,19 @@ public class StoryWebVH extends BaseViewHolder<StoryData> {
     public StoryWebVH(View itemView) {
         super(itemView);
         mWebView = (WebView) itemView.findViewById(R.id.adapter_web_webView);
+        mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.clearCache(true);
+        mWebView.clearHistory();
         mWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        mWebView.getSettings().setLightTouchEnabled(false);
-        mWebView.setHorizontalScrollBarEnabled(false);
+        mWebView.setHorizontalScrollBarEnabled(true);
+        mWebView.setWebChromeClient(new WebChromeClient());
         mWebView.setWebViewClient(new WebViewClient() {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     Tracer.debug(TAG, "shouldOverrideUrlLoading: " + request.getUrl().toString());
-                    mParent.setTag(new StoryClickData(CLICKED_URL, request.getUrl().toString()));
-                    onClick(mParent);
                 }
                 return true;
             }
@@ -48,7 +50,7 @@ public class StoryWebVH extends BaseViewHolder<StoryData> {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 Tracer.debug(TAG, "shouldOverrideUrlLoading: " + url);
                 mParent.setTag(new StoryClickData(CLICKED_URL, url));
-                onClick(mParent);
+//                onClick(mParent);
                 return true;
             }
 
@@ -57,14 +59,14 @@ public class StoryWebVH extends BaseViewHolder<StoryData> {
                 super.onPageFinished(webView, url);
                 webView.invalidate();
                 mParent.setTag(new StoryClickData(STOP_LOADING_URL, url));
-                onClick(mParent);
+//                onClick(mParent);
             }
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 mParent.setTag(new StoryClickData(START_LOADING_URL, url));
-                onClick(mParent);
+//                onClick(mParent);
             }
         });
     }
@@ -75,6 +77,9 @@ public class StoryWebVH extends BaseViewHolder<StoryData> {
         mWebView.loadUrl(storyData.getDescription());
     }
 
+    /**
+     * Callback event to check the click event
+     */
     public class StoryClickData {
         private String mUrl;
         private int mOperation;

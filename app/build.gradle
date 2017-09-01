@@ -9,6 +9,8 @@ def INPUT_TYPE_TEXT = "INPUT_TYPE_TEXT"
 def TEXT = "\"TEXT\""
 def INPUT_TYPE_WEB = "INPUT_TYPE_WEB"
 def WEB = "\"WEB\""
+def STORY_KEY_PRE_TAG = "STORY_KEY_PRE_TAG"
+def PRE_TAG = "\"MKR_\""
 
 android {
     compileSdkVersion 25
@@ -28,6 +30,7 @@ android {
             buildConfigField STRING, BASE_TAG, "\"MkrWorld.SexStories\""
             buildConfigField STRING, INPUT_TYPE_TEXT, TEXT
             buildConfigField STRING, INPUT_TYPE_WEB, WEB
+            buildConfigField STRING, STORY_KEY_PRE_TAG, PRE_TAG
             buildConfigField BOOLEAN, SHOW_LOG, TRUE
         }
         release {
