@@ -105,7 +105,6 @@ public class FetchPageStoryController implements FetchStoryContentController.OnF
      * @return TRUE
      */
     private boolean isGetAllStoryResponse() {
-        Tracer.debug(TAG, "isGetAllStoryResponse: " + mStartIndex + "    " + mEndIndex + "    " + mFailureCount + "     " + mStoryDataArrayList.size() + "     " + (!((mStartIndex - mEndIndex) >= (mFailureCount + mStoryDataArrayList.size()))));
         return !((mStartIndex - mEndIndex) >= (mFailureCount + mStoryDataArrayList.size()));
     }
 

@@ -22,7 +22,6 @@ android {
     buildTypes {
         debug {
             buildConfigField STRING, BASE_TAG, "\"MkrWorld.Stories\""
-            buildConfigField BOOLEAN, SHOW_LOG, FALSE
             buildConfigField STRING, BASE_TAG, "\"MkrWorld.Stories\""
             buildConfigField STRING, STORY_KEY_PRE_TAG, PRE_TAG
             buildConfigField BOOLEAN, SHOW_LOG, TRUE
@@ -30,6 +29,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField STRING, BASE_TAG, "\"MkrWorld.Stories\""
+            buildConfigField STRING, BASE_TAG, "\"MkrWorld.Stories\""
+            buildConfigField STRING, STORY_KEY_PRE_TAG, PRE_TAG
+            buildConfigField BOOLEAN, SHOW_LOG, FALSE
         }
     }
 }
