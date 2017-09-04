@@ -1,11 +1,11 @@
-package com.mkrworld.stories.ui.adapter.viewholder;
+package com.mkrworld.stories.ui.adapter;
 
 import android.view.View;
 import android.widget.TextView;
 
 import com.mkrworld.stories.R;
 import com.mkrworld.stories.data.StoryData;
-import com.mkrworld.stories.ui.adapter.BaseViewHolder;
+import com.mkrworld.stories.customs.ui.adapter.BaseViewHolder;
 
 /**
  * Created by A1ZFKXA3 on 8/21/2017.

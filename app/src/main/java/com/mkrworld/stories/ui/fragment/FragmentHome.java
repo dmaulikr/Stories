@@ -8,10 +8,10 @@ import android.view.View;
 import com.mkrworld.stories.BuildConfig;
 import com.mkrworld.stories.controller.FetchPageStoryController;
 import com.mkrworld.stories.data.StoryData;
-import com.mkrworld.stories.ui.adapter.AdapterItem;
-import com.mkrworld.stories.ui.adapter.AdapterItemHandler;
-import com.mkrworld.stories.ui.adapter.BaseAdapter;
-import com.mkrworld.stories.ui.adapter.BaseViewHolder;
+import com.mkrworld.stories.customs.ui.adapter.AdapterItem;
+import com.mkrworld.stories.customs.ui.adapter.AdapterItemHandler;
+import com.mkrworld.stories.customs.ui.adapter.BaseAdapter;
+import com.mkrworld.stories.customs.ui.adapter.BaseViewHolder;
 import com.mkrworld.stories.utils.PreferenceDataUtils;
 import com.mkrworld.stories.utils.Tracer;
 

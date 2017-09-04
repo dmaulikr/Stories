@@ -1,4 +1,4 @@
-package com.mkrworld.stories.ui.adapter;
+package com.mkrworld.stories.customs.ui.adapter;
 
 public class AdapterItem<MKR> {
     private AdapterItemHandler.AdapterItemViewType viewType;

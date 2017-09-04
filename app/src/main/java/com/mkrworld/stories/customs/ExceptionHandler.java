@@ -1,8 +1,9 @@
-package com.mkrworld.stories;
+package com.mkrworld.stories.customs;
 
 import android.content.Context;
 import android.widget.Toast;
 
+import com.mkrworld.stories.BuildConfig;
 import com.mkrworld.stories.utils.Tracer;
 
 /**

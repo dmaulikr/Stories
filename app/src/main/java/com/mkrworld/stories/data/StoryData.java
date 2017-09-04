@@ -8,13 +8,11 @@ public class StoryData {
     private String mId;
     private String mTitle;
     private String mDescrpition;
-    private String mInputType;
 
-    public StoryData(String id, String title, String description, String inputType) {
+    public StoryData(String id, String title, String description) {
         mTitle = title;
         mId = id;
         mDescrpition = description;
-        mInputType = inputType;
     }
 
     /**
@@ -42,14 +40,5 @@ public class StoryData {
      */
     public String getDescription() {
         return mDescrpition;
-    }
-
-    /**
-     * Method to get the Input type
-     *
-     * @return
-     */
-    public String getInputType() {
-        return mInputType;
     }
 }

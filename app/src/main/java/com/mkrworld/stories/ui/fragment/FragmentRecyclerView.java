@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 
 import com.mkrworld.stories.BuildConfig;
 import com.mkrworld.stories.R;
-import com.mkrworld.stories.ui.adapter.BaseAdapter;
-import com.mkrworld.stories.ui.adapter.BaseViewHolder;
+import com.mkrworld.stories.customs.ui.adapter.BaseAdapter;
+import com.mkrworld.stories.customs.ui.adapter.BaseViewHolder;
 import com.mkrworld.stories.utils.Tracer;
 
 /**

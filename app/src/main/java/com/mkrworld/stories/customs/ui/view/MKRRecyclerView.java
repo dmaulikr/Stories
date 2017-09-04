@@ -1,4 +1,4 @@
-package com.mkrworld.stories.ui.custom;
+package com.mkrworld.stories.customs.ui.view;
 
 import android.content.Context;
 import android.support.annotation.Nullable;

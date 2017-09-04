@@ -5,8 +5,8 @@ import android.content.Context;
 import com.google.firebase.database.DataSnapshot;
 import com.mkrworld.stories.BuildConfig;
 import com.mkrworld.stories.R;
+import com.mkrworld.stories.customs.network.ConnectivityInfoUtils;
 import com.mkrworld.stories.data.StoryData;
-import com.mkrworld.stories.utils.ConnectivityInfoUtils;
 import com.mkrworld.stories.utils.Tracer;
 import com.mkrworld.stories.utils.libutils.FirebaseUtils;
 
@@ -47,9 +47,8 @@ public class FetchStoryContentController implements FirebaseUtils.OnFirebaseList
         try {
             String title = (String) dataSnapshot.child(FirebaseUtils.TITLE).getValue();
             String story = (String) dataSnapshot.child(FirebaseUtils.STORY).getValue();
-            String inputType = (String) dataSnapshot.child(FirebaseUtils.INPUT_TYPE).getValue();
             if (mOnFetchStoryContentControllerListener != null) {
-                mOnFetchStoryContentControllerListener.onFetchStoryContentSuccess(new StoryData(mPageId, title, story, inputType));
+                mOnFetchStoryContentControllerListener.onFetchStoryContentSuccess(new StoryData(mPageId, title, story));
             }
         } catch (Exception e) {
             Tracer.error(TAG, "onFirebaseStoryFetchStoryDataSuccess()" + e.getMessage());

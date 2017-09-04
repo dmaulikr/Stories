@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.mkrworld.stories.BuildConfig;
 import com.mkrworld.stories.R;
+import com.mkrworld.stories.customs.network.ConnectivityInfoUtils;
 import com.mkrworld.stories.data.StoryData;
-import com.mkrworld.stories.utils.ConnectivityInfoUtils;
 import com.mkrworld.stories.utils.Tracer;
 
 import java.util.ArrayList;
@@ -77,29 +77,25 @@ public class FetchPageStoryController implements FetchStoryContentController.OnF
     private void validateResponse() {
         Tracer.debug(TAG, "validateResponse: ");
         if (isGetAllStoryResponse() && mOnFetchPageStoryControllerListener != null) {
-            if (mStoryDataArrayList.size() == mFailureCount) {
-                mOnFetchPageStoryControllerListener.onFetchPageStoryFailed("Error");
-            } else {
-                Collections.sort(mStoryDataArrayList, new Comparator<StoryData>() {
-                    @Override
-                    public int compare(StoryData storyData1, StoryData storyData2) {
-                        try {
-                            int id1 = Integer.parseInt(storyData1.getId().replace(BuildConfig.STORY_KEY_PRE_TAG, "").trim());
-                            int id2 = Integer.parseInt(storyData2.getId().replace(BuildConfig.STORY_KEY_PRE_TAG, "").trim());
-                            if (id1 < id2) {
-                                return 1;
-                            } else if (id1 > id2) {
-                                return -1;
-                            }
-                            return 0;
-                        } catch (Exception e) {
-                            Tracer.error(TAG, "compare: " + e.getMessage());
+            Collections.sort(mStoryDataArrayList, new Comparator<StoryData>() {
+                @Override
+                public int compare(StoryData storyData1, StoryData storyData2) {
+                    try {
+                        int id1 = Integer.parseInt(storyData1.getId().replace(BuildConfig.STORY_KEY_PRE_TAG, "").trim());
+                        int id2 = Integer.parseInt(storyData2.getId().replace(BuildConfig.STORY_KEY_PRE_TAG, "").trim());
+                        if (id1 < id2) {
+                            return 1;
+                        } else if (id1 > id2) {
+                            return -1;
                         }
                         return 0;
+                    } catch (Exception e) {
+                        Tracer.error(TAG, "compare: " + e.getMessage());
                     }
-                });
-                mOnFetchPageStoryControllerListener.onFetchPageStorySuccess(mStoryDataArrayList);
-            }
+                    return 0;
+                }
+            });
+            mOnFetchPageStoryControllerListener.onFetchPageStorySuccess(mStoryDataArrayList);
         }
     }
 
@@ -109,6 +105,7 @@ public class FetchPageStoryController implements FetchStoryContentController.OnF
      * @return TRUE
      */
     private boolean isGetAllStoryResponse() {
+        Tracer.debug(TAG, "isGetAllStoryResponse: " + mStartIndex + "    " + mEndIndex + "    " + mFailureCount + "     " + mStoryDataArrayList.size() + "     " + (!((mStartIndex - mEndIndex) >= (mFailureCount + mStoryDataArrayList.size()))));
         return !((mStartIndex - mEndIndex) >= (mFailureCount + mStoryDataArrayList.size()));
     }
 

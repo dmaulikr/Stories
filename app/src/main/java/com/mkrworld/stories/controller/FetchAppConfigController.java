@@ -6,7 +6,7 @@ import android.content.Context;
 import com.google.firebase.database.DataSnapshot;
 import com.mkrworld.stories.BuildConfig;
 import com.mkrworld.stories.R;
-import com.mkrworld.stories.utils.ConnectivityInfoUtils;
+import com.mkrworld.stories.customs.network.ConnectivityInfoUtils;
 import com.mkrworld.stories.utils.PreferenceDataUtils;
 import com.mkrworld.stories.utils.Tracer;
 import com.mkrworld.stories.utils.libutils.FirebaseUtils;

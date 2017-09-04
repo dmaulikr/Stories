@@ -21,7 +21,6 @@ public class FirebaseUtils {
     public static final String STORY_LIST = "story_list";
     public static final String TITLE = "title";
     public static final String STORY = "story";
-    public static final String INPUT_TYPE = "input_type";
     // ================================================================
     private static FirebaseUtils mFirebaseUtils;
     private static final String TAG = BuildConfig.BASE_TAG + ".FirebaseUtils";
@@ -69,8 +68,13 @@ public class FirebaseUtils {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Tracer.debug(TAG, "fetchStoryContent().onDataChange() " + dataSnapshot.getValue());
                 databaseReference.removeEventListener(this);
+                if (dataSnapshot.getValue() == null) {
+                    if (onFirebaseListener != null) {
+                        onFirebaseListener.onFirebaseStoryFetchStoryDataFailed(storyId, "");
+                    }
+                    return;
+                }
                 try {
-                    String title = (String) dataSnapshot.child(TITLE).getValue();
                     if (onFirebaseListener != null) {
                         onFirebaseListener.onFirebaseStoryFetchStoryDataSuccess(storyId, dataSnapshot);
                     }
@@ -106,6 +110,12 @@ public class FirebaseUtils {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Tracer.debug(TAG, "getAppConfig().onDataChange() ");
                 databaseReference.removeEventListener(this);
+                if (dataSnapshot.getValue() == null) {
+                    if (onFirebaseListener != null) {
+                        onFirebaseListener.onFirebaseConfigFetchFailed("");
+                    }
+                    return;
+                }
                 if (onFirebaseListener != null) {
                     onFirebaseListener.onFirebaseConfigFetchSuccess(dataSnapshot);
                 }

@@ -1,4 +1,4 @@
-package com.mkrworld.stories.ui.adapter;
+package com.mkrworld.stories.customs.ui.adapter;
 
 
 import android.support.v7.widget.RecyclerView;

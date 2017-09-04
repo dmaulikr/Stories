@@ -1,4 +1,4 @@
-package com.mkrworld.stories.controller;
+package com.mkrworld.stories.customs.controller;
 
 import android.Manifest;
 import android.app.Activity;

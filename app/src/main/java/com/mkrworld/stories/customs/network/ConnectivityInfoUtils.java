@@ -1,4 +1,4 @@
-package com.mkrworld.stories.utils;
+package com.mkrworld.stories.customs.network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 
 import com.mkrworld.stories.BuildConfig;
+import com.mkrworld.stories.utils.Tracer;
 
 import java.net.HttpURLConnection;
 import java.net.URL;

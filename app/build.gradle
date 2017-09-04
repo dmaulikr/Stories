@@ -5,10 +5,6 @@ def TRUE = "true"
 def FALSE = "false"
 def BASE_TAG = "BASE_TAG"
 def SHOW_LOG = "SHOW_LOG";
-def INPUT_TYPE_TEXT = "INPUT_TYPE_TEXT"
-def TEXT = "\"TEXT\""
-def INPUT_TYPE_WEB = "INPUT_TYPE_WEB"
-def WEB = "\"WEB\""
 def STORY_KEY_PRE_TAG = "STORY_KEY_PRE_TAG"
 def PRE_TAG = "\"MKR_\""
 
@@ -25,11 +21,9 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField STRING, BASE_TAG, "\"MkrWorld.SexStories\""
+            buildConfigField STRING, BASE_TAG, "\"MkrWorld.Stories\""
             buildConfigField BOOLEAN, SHOW_LOG, FALSE
-            buildConfigField STRING, BASE_TAG, "\"MkrWorld.SexStories\""
-            buildConfigField STRING, INPUT_TYPE_TEXT, TEXT
-            buildConfigField STRING, INPUT_TYPE_WEB, WEB
+            buildConfigField STRING, BASE_TAG, "\"MkrWorld.Stories\""
             buildConfigField STRING, STORY_KEY_PRE_TAG, PRE_TAG
             buildConfigField BOOLEAN, SHOW_LOG, TRUE
         }

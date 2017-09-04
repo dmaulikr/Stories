@@ -9,8 +9,8 @@ import android.view.Menu;
 
 import com.mkrworld.stories.BuildConfig;
 import com.mkrworld.stories.R;
-import com.mkrworld.stories.controller.AppPermissionController;
 import com.mkrworld.stories.controller.FetchAppConfigController;
+import com.mkrworld.stories.customs.controller.AppPermissionController;
 import com.mkrworld.stories.ui.fragment.FragmentHome;
 import com.mkrworld.stories.ui.fragment.FragmentRecyclerView;
 import com.mkrworld.stories.utils.Tracer;

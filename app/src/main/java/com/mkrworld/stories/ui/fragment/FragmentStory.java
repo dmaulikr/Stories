@@ -8,9 +8,9 @@ import android.view.View;
 import com.mkrworld.stories.BuildConfig;
 import com.mkrworld.stories.controller.FetchStoryContentController;
 import com.mkrworld.stories.data.StoryData;
-import com.mkrworld.stories.ui.adapter.AdapterItem;
-import com.mkrworld.stories.ui.adapter.AdapterItemHandler;
-import com.mkrworld.stories.ui.adapter.BaseViewHolder;
+import com.mkrworld.stories.customs.ui.adapter.AdapterItem;
+import com.mkrworld.stories.customs.ui.adapter.AdapterItemHandler;
+import com.mkrworld.stories.customs.ui.adapter.BaseViewHolder;
 import com.mkrworld.stories.utils.Tracer;
 
 import java.util.ArrayList;
@@ -54,11 +54,7 @@ public class FragmentStory extends FragmentRecyclerView implements FetchStoryCon
     public void onFetchStoryContentSuccess(StoryData storyData) {
         Tracer.debug(TAG, "onFetchStoryContentSuccess: ");
         hideProgress();
-        if (storyData.getInputType().equalsIgnoreCase(BuildConfig.INPUT_TYPE_WEB)) {
-            loadWebStory(storyData);
-        } else {
-            loadTextStory(storyData);
-        }
+        loadTextStory(storyData);
     }
 
     @Override
@@ -73,16 +69,6 @@ public class FragmentStory extends FragmentRecyclerView implements FetchStoryCon
      */
     private void loadTextStory(StoryData storyData) {
         AdapterItem storyDataAdapterItem = new AdapterItem(AdapterItemHandler.AdapterItemViewType.STORY_TEXT, storyData);
-        ArrayList<AdapterItem> storyDataArrayList = new ArrayList<>();
-        storyDataArrayList.add(storyDataAdapterItem);
-        getBaseAdapter().updateAdapterItemList(storyDataArrayList);
-    }
-
-    /**
-     * Method to load the Web Story
-     */
-    private void loadWebStory(StoryData storyData) {
-        AdapterItem storyDataAdapterItem = new AdapterItem(AdapterItemHandler.AdapterItemViewType.STORY_WEB, storyData);
         ArrayList<AdapterItem> storyDataArrayList = new ArrayList<>();
         storyDataArrayList.add(storyDataAdapterItem);
         getBaseAdapter().updateAdapterItemList(storyDataArrayList);
