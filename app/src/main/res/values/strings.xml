@@ -3,4 +3,17 @@
     <string name="dialog_message_please_wait">Please wait.....</string>
     <string name="failed_to_start_app">Failed to start App, Try again....</string>
     <string name="no_network_connection">No Network Connection ...........</string>
+
+    <!-- PROMOTION -->
+    <string name="promotion_publisher_email">mkrworldapps@gmail.com</string>
+    <string name="promotion_publisher_subject">Stories</string>
+    <string name="promotion_publisher_name">MKR WORLD</string>
+    <string name="promotion_share">Share this app with your friends, if you really like it.</string>
+
+    <!-- MENU OPTION HOME -->
+    <string name="menu_option_home_offline_story">Offline Story</string>
+    <string name="menu_option_home_share_app">Share App</string>
+    <string name="menu_option_home_rate_us">Rate Us</string>
+    <string name="menu_option_home_more_apps">More Apps</string>
+
 </resources>

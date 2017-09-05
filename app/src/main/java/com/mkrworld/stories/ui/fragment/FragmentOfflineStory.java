@@ -6,11 +6,11 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.mkrworld.stories.BuildConfig;
-import com.mkrworld.stories.controller.FetchStoryContentController;
-import com.mkrworld.stories.data.StoryData;
 import com.mkrworld.stories.customs.ui.adapter.AdapterItem;
 import com.mkrworld.stories.customs.ui.adapter.AdapterItemHandler;
 import com.mkrworld.stories.customs.ui.adapter.BaseViewHolder;
+import com.mkrworld.stories.data.ApplicationDataBase;
+import com.mkrworld.stories.data.StoryData;
 import com.mkrworld.stories.utils.Tracer;
 
 import java.util.ArrayList;
@@ -19,10 +19,9 @@ import java.util.ArrayList;
  * Created by A1ZFKXA3 on 8/18/2017.
  */
 
-public class FragmentStory extends FragmentRecyclerView implements FetchStoryContentController.OnFetchStoryContentControllerListener {
+public class FragmentOfflineStory extends FragmentRecyclerView {
     public static final String EXTRA_STORY_ID = "EXTRA_STORY_ID";
-    private static final String TAG = BuildConfig.BASE_TAG + ".FragmentStory";
-    private static final String DEFAULT_STORY_ID = "DEFAULT_STORY_ID";
+    private static final String TAG = BuildConfig.BASE_TAG + ".FragmentOfflineStory";
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -34,8 +33,8 @@ public class FragmentStory extends FragmentRecyclerView implements FetchStoryCon
             return;
         }
         if (!getArguments().getString(EXTRA_STORY_ID, "").trim().isEmpty()) {
-            String pageId = getArguments().getString(EXTRA_STORY_ID, "").trim();
-            new FetchStoryContentController(getContext(), pageId, this).fetchStoryContent();
+            String storyId = getArguments().getString(EXTRA_STORY_ID, "").trim();
+            loadTextStory(ApplicationDataBase.getInstance(getContext()).getStoryData(storyId));
         } else {
             getActivity().onBackPressed();
         }
@@ -43,22 +42,7 @@ public class FragmentStory extends FragmentRecyclerView implements FetchStoryCon
 
     @Override
     public void onViewHolderClicked(BaseViewHolder holder, View view) {
-        Tracer.debug(TAG, "onViewHolderClicked: ");
-        Tracer.showSnack(getRecyclerView(), view.getTag().toString());
-    }
-
-    @Override
-    public void onFetchStoryContentSuccess(StoryData storyData) {
-        Tracer.debug(TAG, "onFetchStoryContentSuccess: ");
-        hideProgress();
-        loadTextStory(storyData);
-    }
-
-    @Override
-    public void onFetchStoryContentFailed(String id, String error) {
-        Tracer.debug(TAG, "onFetchStoryContentFailed: ");
-        hideProgress();
-        Tracer.showSnack(getRecyclerView(), error);
+        // Do-Nothing
     }
 
     /**
@@ -70,4 +54,5 @@ public class FragmentStory extends FragmentRecyclerView implements FetchStoryCon
         storyDataArrayList.add(storyDataAdapterItem);
         getBaseAdapter().updateAdapterItemList(storyDataArrayList);
     }
+
 }

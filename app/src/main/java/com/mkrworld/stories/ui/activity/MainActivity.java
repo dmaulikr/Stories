@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 
 import com.mkrworld.stories.BuildConfig;
 import com.mkrworld.stories.R;
@@ -29,13 +28,6 @@ public class MainActivity extends AppCompatActivity implements AppPermissionCont
         setSupportActionBar(toolbar);
         mAppPermissionController = new AppPermissionController(this, this);
         mAppPermissionController.initializedAppPermission();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        Tracer.debug(TAG, "onCreateOptionsMenu: ");
-        getMenuInflater().inflate(R.menu.menu_story, menu);
-        return true;
     }
 
     @Override

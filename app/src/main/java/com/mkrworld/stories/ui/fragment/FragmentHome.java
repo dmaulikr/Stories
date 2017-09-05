@@ -3,15 +3,18 @@ package com.mkrworld.stories.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 
 import com.mkrworld.stories.BuildConfig;
+import com.mkrworld.stories.R;
 import com.mkrworld.stories.controller.FetchPageStoryController;
-import com.mkrworld.stories.data.StoryData;
 import com.mkrworld.stories.customs.ui.adapter.AdapterItem;
 import com.mkrworld.stories.customs.ui.adapter.AdapterItemHandler;
 import com.mkrworld.stories.customs.ui.adapter.BaseAdapter;
 import com.mkrworld.stories.customs.ui.adapter.BaseViewHolder;
+import com.mkrworld.stories.data.StoryData;
 import com.mkrworld.stories.utils.PreferenceDataUtils;
 import com.mkrworld.stories.utils.Tracer;
 
@@ -29,11 +32,19 @@ public class FragmentHome extends FragmentRecyclerView implements BaseAdapter.On
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         Tracer.debug(TAG, "onViewCreated: ");
         super.onViewCreated(view, savedInstanceState);
+        setHasOptionsMenu(true);
         getBaseAdapter().setOnLoadMoreListener(getRecyclerView(), this);
         int currentIndex = PreferenceDataUtils.getStoryMaxCount(getContext());
         int minIndex = PreferenceDataUtils.getStoryMinCount(getContext());
         int pageCount = PreferenceDataUtils.getStoryPageCount(getContext());
         fetchData(currentIndex + 1, minIndex, pageCount);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_home, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override

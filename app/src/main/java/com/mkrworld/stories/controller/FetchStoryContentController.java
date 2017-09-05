@@ -18,7 +18,7 @@ public class FetchStoryContentController implements FirebaseUtils.OnFirebaseList
     private static final String TAG = BuildConfig.BASE_TAG + ".FetchStoryContentController";
     private Context mContext;
     private OnFetchStoryContentControllerListener mOnFetchStoryContentControllerListener;
-    private String mPageId;
+    private String mStoryId;
 
     /**
      * Constructor
@@ -26,10 +26,10 @@ public class FetchStoryContentController implements FirebaseUtils.OnFirebaseList
      * @param context
      * @param onFetchStoryContentControllerListener
      */
-    public FetchStoryContentController(Context context, String pageId, OnFetchStoryContentControllerListener onFetchStoryContentControllerListener) {
+    public FetchStoryContentController(Context context, String storyId, OnFetchStoryContentControllerListener onFetchStoryContentControllerListener) {
         Tracer.debug(TAG, "FetchStoryContentController: ");
         mContext = context;
-        mPageId = pageId;
+        mStoryId = storyId;
         mOnFetchStoryContentControllerListener = onFetchStoryContentControllerListener;
     }
 
@@ -48,7 +48,7 @@ public class FetchStoryContentController implements FirebaseUtils.OnFirebaseList
             String title = (String) dataSnapshot.child(FirebaseUtils.TITLE).getValue();
             String story = (String) dataSnapshot.child(FirebaseUtils.STORY).getValue();
             if (mOnFetchStoryContentControllerListener != null) {
-                mOnFetchStoryContentControllerListener.onFetchStoryContentSuccess(new StoryData(mPageId, title, story));
+                mOnFetchStoryContentControllerListener.onFetchStoryContentSuccess(new StoryData(mStoryId, title, story));
             }
         } catch (Exception e) {
             Tracer.error(TAG, "onFirebaseStoryFetchStoryDataSuccess()" + e.getMessage());
@@ -76,13 +76,13 @@ public class FetchStoryContentController implements FirebaseUtils.OnFirebaseList
     @Override
     public void onConnectivityInfoUtilsNetworkConnected() {
         Tracer.debug(TAG, "onConnectivityInfoUtilsNetworkConnected: ");
-        FirebaseUtils.getInstance().fetchStoryContent(mPageId, this);
+        FirebaseUtils.getInstance().fetchStoryContent(mStoryId, this);
     }
 
     @Override
     public void onConnectivityInfoUtilsNetworkDisconnected() {
         Tracer.debug(TAG, "onConnectivityInfoUtilsNetworkDisconnected: ");
-        onFirebaseStoryFetchStoryDataFailed(mPageId, mContext.getString(R.string.no_network_connection));
+        onFirebaseStoryFetchStoryDataFailed(mStoryId, mContext.getString(R.string.no_network_connection));
     }
 
     /**
