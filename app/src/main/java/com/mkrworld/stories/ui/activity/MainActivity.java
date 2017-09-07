@@ -10,7 +10,9 @@ import com.mkrworld.stories.BuildConfig;
 import com.mkrworld.stories.R;
 import com.mkrworld.stories.controller.FetchAppConfigController;
 import com.mkrworld.stories.customs.controller.AppPermissionController;
+import com.mkrworld.stories.ui.fragment.FragmentBase;
 import com.mkrworld.stories.ui.fragment.FragmentHome;
+import com.mkrworld.stories.ui.fragment.FragmentOfflineHome;
 import com.mkrworld.stories.ui.fragment.FragmentRecyclerView;
 import com.mkrworld.stories.utils.Tracer;
 
@@ -31,6 +33,18 @@ public class MainActivity extends AppCompatActivity implements AppPermissionCont
     }
 
     @Override
+    public void onBackPressed() {
+        Tracer.debug(TAG, "onBackPressed: ");
+        super.onBackPressed();
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.activity_main_fragment_container);
+            if (fragment != null && fragment instanceof FragmentBase) {
+                ((FragmentBase) fragment).onFragmentReloadFromBackStack();
+            }
+        }
+    }
+
+    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         Tracer.debug(TAG, "onRequestPermissionsResult: ");
@@ -46,13 +60,14 @@ public class MainActivity extends AppCompatActivity implements AppPermissionCont
     @Override
     public void onFetchAppConfigSuccess() {
         Tracer.debug(TAG, "onFetchAppConfigSuccess: ");
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_fragment_container, new FragmentHome()).commit();
+        onFragmentRecyclerViewAddFragmentBackStack(new FragmentHome(), FragmentHome.class.getName());
     }
 
     @Override
     public void onFetchAppConfigFailed(String errorMessage) {
         Tracer.debug(TAG, "onFetchAppConfigFailed: ");
         Tracer.showSnack(findViewById(R.id.activity_main_fragment_container), errorMessage);
+        onFragmentRecyclerViewAddFragmentBackStack(new FragmentOfflineHome(), FragmentOfflineHome.class.getName());
     }
 
     @Override

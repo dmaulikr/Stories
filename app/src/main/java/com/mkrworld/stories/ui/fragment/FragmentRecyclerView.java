@@ -19,7 +19,7 @@ import com.mkrworld.stories.utils.Tracer;
  * Created by A1ZFKXA3 on 8/30/2017.
  */
 
-public abstract class FragmentRecyclerView extends Fragment implements BaseViewHolder.VHClickable {
+public abstract class FragmentRecyclerView extends FragmentBase implements BaseViewHolder.VHClickable {
     private static final String TAG = BuildConfig.BASE_TAG + ".FragmentRecyclerView";
     private BaseAdapter mBaseAdapter;
 
@@ -27,6 +27,7 @@ public abstract class FragmentRecyclerView extends Fragment implements BaseViewH
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Tracer.debug(TAG, "onCreateView: ");
+        setHasOptionsMenu(true);
         mBaseAdapter = new BaseAdapter();
         mBaseAdapter.setVHClickCallback(this);
         return inflater.inflate(R.layout.fragment_recycler_view, container, false);
@@ -91,5 +92,6 @@ public abstract class FragmentRecyclerView extends Fragment implements BaseViewH
          * @param tag
          */
         public void onFragmentRecyclerViewAddFragmentBackStack(Fragment fragment, String tag);
+
     }
 }

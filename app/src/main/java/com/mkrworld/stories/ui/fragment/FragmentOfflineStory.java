@@ -55,4 +55,8 @@ public class FragmentOfflineStory extends FragmentRecyclerView {
         getBaseAdapter().updateAdapterItemList(storyDataArrayList);
     }
 
+    @Override
+    public void onFragmentReloadFromBackStack() {
+        Tracer.debug(TAG, "onFragmentReloadFromBackStack: ");
+    }
 }

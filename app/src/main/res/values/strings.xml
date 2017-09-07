@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Stories</string>
+    <string name="title_stories">Stories</string>
+    <string name="title_offline_stories">Offline Stories</string>
     <string name="dialog_message_please_wait">Please wait.....</string>
     <string name="failed_to_start_app">Failed to start App, Try again....</string>
     <string name="no_network_connection">No Network Connection ...........</string>
@@ -15,5 +17,8 @@
     <string name="menu_option_home_share_app">Share App</string>
     <string name="menu_option_home_rate_us">Rate Us</string>
     <string name="menu_option_home_more_apps">More Apps</string>
+    <string name="menu_option_home_send_feedback">Send Feedback</string>
+    <string name="menu_option_home_save_offline">Save Offline</string>
+    <string name="menu_option_home_share_story">Share Story</string>
 
 </resources>

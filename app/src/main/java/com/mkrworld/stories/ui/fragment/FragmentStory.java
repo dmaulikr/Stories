@@ -22,7 +22,6 @@ import java.util.ArrayList;
 public class FragmentStory extends FragmentRecyclerView implements FetchStoryContentController.OnFetchStoryContentControllerListener {
     public static final String EXTRA_STORY_ID = "EXTRA_STORY_ID";
     private static final String TAG = BuildConfig.BASE_TAG + ".FragmentStory";
-    private static final String DEFAULT_STORY_ID = "DEFAULT_STORY_ID";
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -69,5 +68,10 @@ public class FragmentStory extends FragmentRecyclerView implements FetchStoryCon
         ArrayList<AdapterItem> storyDataArrayList = new ArrayList<>();
         storyDataArrayList.add(storyDataAdapterItem);
         getBaseAdapter().updateAdapterItemList(storyDataArrayList);
+    }
+
+    @Override
+    public void onFragmentReloadFromBackStack() {
+        Tracer.debug(TAG, "onFragmentReloadFromBackStack: ");
     }
 }
