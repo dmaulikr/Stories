@@ -61,8 +61,8 @@ public class ConnectivityInfoUtils {
                         URL url = new URL("https://google.com/");
                         urlConnection = (HttpURLConnection) url.openConnection();
                         urlConnection.setRequestMethod("GET");
-                        urlConnection.setReadTimeout(3000);
-                        urlConnection.setConnectTimeout(3000);
+                        urlConnection.setReadTimeout(5000);
+                        urlConnection.setConnectTimeout(5000);
                         int responseCode = urlConnection.getResponseCode();
                         Tracer.error(TAG, "doInBackground: " + responseCode);
                         switch (responseCode) {

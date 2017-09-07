@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements AppPermissionCont
                 ((FragmentBase) fragment).onFragmentReloadFromBackStack();
             }
         }
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            finish();
+        }
     }
 
     @Override
@@ -60,19 +63,22 @@ public class MainActivity extends AppCompatActivity implements AppPermissionCont
     @Override
     public void onFetchAppConfigSuccess() {
         Tracer.debug(TAG, "onFetchAppConfigSuccess: ");
-        onFragmentRecyclerViewAddFragmentBackStack(new FragmentHome(), FragmentHome.class.getName());
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_fragment_container, new FragmentHome(), FragmentHome.class.getName()).addToBackStack(FragmentHome.class.getName()).commit();
     }
 
     @Override
     public void onFetchAppConfigFailed(String errorMessage) {
         Tracer.debug(TAG, "onFetchAppConfigFailed: ");
         Tracer.showSnack(findViewById(R.id.activity_main_fragment_container), errorMessage);
-        onFragmentRecyclerViewAddFragmentBackStack(new FragmentOfflineHome(), FragmentOfflineHome.class.getName());
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_fragment_container, new FragmentOfflineHome(), FragmentOfflineHome.class.getName()).addToBackStack(FragmentOfflineHome.class.getName()).commit();
     }
 
     @Override
     public void onFragmentRecyclerViewAddFragmentBackStack(Fragment fragment, String tag) {
         Tracer.debug(TAG, "onFragmentRecyclerViewAddFragmentBackStack: ");
-        getSupportFragmentManager().beginTransaction().add(R.id.activity_main_fragment_container, fragment, tag).addToBackStack(tag).commit();
+        Fragment fragmentByTag = getSupportFragmentManager().findFragmentByTag(tag);
+        if (fragmentByTag == null) {
+            getSupportFragmentManager().beginTransaction().add(R.id.activity_main_fragment_container, fragment, tag).addToBackStack(tag).commit();
+        }
     }
 }

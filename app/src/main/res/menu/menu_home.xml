@@ -2,23 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_story_home_offline_stories"
+        android:id="@+id/menu_home_offline_stories"
         android:title="@string/menu_option_home_offline_story"
         app:showAsAction="never" />
     <item
-        android:id="@+id/menu_story_home_share_app"
+        android:id="@+id/menu_home_share_app"
         android:title="@string/menu_option_home_share_app"
         app:showAsAction="never" />
     <item
-        android:id="@+id/menu_story_home_rate_us"
+        android:id="@+id/menu_home_rate_us"
         android:title="@string/menu_option_home_rate_us"
         app:showAsAction="never" />
     <item
-        android:id="@+id/menu_story_home_more_apps"
+        android:id="@+id/menu_home_more_apps"
         android:title="@string/menu_option_home_more_apps"
         app:showAsAction="never" />
     <item
-        android:id="@+id/menu_story_home_send_feedback"
+        android:id="@+id/menu_home_send_feedback"
         android:title="@string/menu_option_home_send_feedback"
         app:showAsAction="never" />
 </menu>

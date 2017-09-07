@@ -3,9 +3,14 @@ package com.mkrworld.stories.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.mkrworld.stories.BuildConfig;
+import com.mkrworld.stories.R;
 import com.mkrworld.stories.customs.ui.adapter.AdapterItem;
 import com.mkrworld.stories.customs.ui.adapter.AdapterItemHandler;
 import com.mkrworld.stories.customs.ui.adapter.BaseViewHolder;
@@ -22,22 +27,50 @@ import java.util.ArrayList;
 public class FragmentOfflineStory extends FragmentRecyclerView {
     public static final String EXTRA_STORY_ID = "EXTRA_STORY_ID";
     private static final String TAG = BuildConfig.BASE_TAG + ".FragmentOfflineStory";
+    private String mStoryId;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         Tracer.debug(TAG, "onViewCreated: ");
         super.onViewCreated(view, savedInstanceState);
-        showProgress();
+        setHasOptionsMenu(true);
         if (getArguments() == null) {
             getActivity().onBackPressed();
             return;
         }
         if (!getArguments().getString(EXTRA_STORY_ID, "").trim().isEmpty()) {
-            String storyId = getArguments().getString(EXTRA_STORY_ID, "").trim();
-            loadTextStory(ApplicationDataBase.getInstance(getContext()).getStoryData(storyId));
+            mStoryId = getArguments().getString(EXTRA_STORY_ID, "").trim();
+            loadTextStory(ApplicationDataBase.getInstance(getContext()).getStoryData(mStoryId));
         } else {
             getActivity().onBackPressed();
         }
+        // SET TITLE
+        if (getActivity() instanceof AppCompatActivity) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.title_offline_stories));
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_offline_story, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_offline_story_remove_story:
+                if (mStoryId != null && !mStoryId.trim().isEmpty()) {
+                    ApplicationDataBase.getInstance(getContext()).deleteStoryData(mStoryId);
+                    getActivity().onBackPressed();
+                } else {
+                    Tracer.showSnack(getRecyclerView(), getString(R.string.operation_failed));
+                }
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -49,6 +82,7 @@ public class FragmentOfflineStory extends FragmentRecyclerView {
      * Method to load the Text Story
      */
     private void loadTextStory(StoryData storyData) {
+        Tracer.debug(TAG, "loadTextStory: " + storyData.getId());
         AdapterItem storyDataAdapterItem = new AdapterItem(AdapterItemHandler.AdapterItemViewType.STORY_TEXT, storyData);
         ArrayList<AdapterItem> storyDataArrayList = new ArrayList<>();
         storyDataArrayList.add(storyDataAdapterItem);

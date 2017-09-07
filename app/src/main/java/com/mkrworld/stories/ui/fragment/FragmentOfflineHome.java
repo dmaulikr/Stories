@@ -32,15 +32,11 @@ public class FragmentOfflineHome extends FragmentRecyclerView {
         Tracer.debug(TAG, "onViewCreated: ");
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
-        ArrayList<StoryData> storyDataList = ApplicationDataBase.getInstance(getContext()).getStoryDataList();
-        ArrayList<AdapterItem> adapterItemArrayList = new ArrayList<>();
-        for (StoryData storyData : storyDataList) {
-            adapterItemArrayList.add(new AdapterItem(AdapterItemHandler.AdapterItemViewType.STORY_TITLES, storyData));
-        }
-        getBaseAdapter().appendAdapterItemList(adapterItemArrayList);
+        // SET TITLE
         if (getActivity() instanceof AppCompatActivity) {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.title_offline_stories));
         }
+        loadStoryList();
     }
 
     @Override
@@ -55,11 +51,11 @@ public class FragmentOfflineHome extends FragmentRecyclerView {
         Tracer.debug(TAG, "onViewHolderClicked: ");
         StoryData storyTitleData = (StoryData) view.getTag();
         if (getActivity() instanceof OnFragmentRecyclerViewListener) {
-            FragmentStory fragmentStory = new FragmentStory();
+            FragmentOfflineStory fragmentOfflinStory = new FragmentOfflineStory();
             Bundle bundle = new Bundle();
-            bundle.putString(FragmentStory.EXTRA_STORY_ID, storyTitleData.getId());
-            fragmentStory.setArguments(bundle);
-            ((OnFragmentRecyclerViewListener) getActivity()).onFragmentRecyclerViewAddFragmentBackStack(fragmentStory, FragmentStory.class.getName());
+            bundle.putString(FragmentOfflineStory.EXTRA_STORY_ID, storyTitleData.getId());
+            fragmentOfflinStory.setArguments(bundle);
+            ((OnFragmentRecyclerViewListener) getActivity()).onFragmentRecyclerViewAddFragmentBackStack(fragmentOfflinStory, FragmentOfflineStory.class.getName());
         }
     }
 
@@ -69,6 +65,24 @@ public class FragmentOfflineHome extends FragmentRecyclerView {
         getActivity().invalidateOptionsMenu();
         if (getActivity() instanceof AppCompatActivity) {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.title_offline_stories));
+        }
+        loadStoryList();
+    }
+
+    /**
+     * Method to load offline Story
+     */
+    private void loadStoryList() {
+        Tracer.debug(TAG, "loadStoryList: ");
+        // FETCH OFFLINE LIST AND ADD IN ADAPTER
+        ArrayList<StoryData> storyDataList = ApplicationDataBase.getInstance(getContext()).getStoryDataList();
+        ArrayList<AdapterItem> adapterItemArrayList = new ArrayList<>();
+        for (StoryData storyData : storyDataList) {
+            adapterItemArrayList.add(new AdapterItem(AdapterItemHandler.AdapterItemViewType.STORY_TITLES, storyData));
+        }
+        getBaseAdapter().updateAdapterItemList(adapterItemArrayList);
+        if (storyDataList.size() == 0) {
+            Tracer.showSnack(getRecyclerView(), getString(R.string.no_saved_story_found));
         }
     }
 }

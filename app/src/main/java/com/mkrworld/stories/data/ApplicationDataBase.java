@@ -99,8 +99,18 @@ public class ApplicationDataBase extends SQLiteOpenHelper {
      *
      * @param storyData data of a new-story
      */
-    public void saveLocationData(StoryData storyData) {
-        Tracer.debug(TAG, "saveLocationData() " + storyData);
+    public void saveStoryData(StoryData storyData) {
+        Tracer.debug(TAG, "saveStoryData() " + storyData);
         mTableStoryData.saveStoryData(getWritableDatabase(), storyData);
+    }
+
+    /**
+     * Method to delete the StoryData
+     *
+     * @param storyId
+     */
+    public void deleteStoryData(String storyId) {
+        Tracer.debug(TAG, "deleteStoryData() " + storyId);
+        mTableStoryData.deleteStoryData(getWritableDatabase(), storyId);
     }
 }

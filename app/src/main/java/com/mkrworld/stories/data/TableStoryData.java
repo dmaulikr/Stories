@@ -152,13 +152,24 @@ public class TableStoryData {
     }
 
     /**
+     * Method to delete StoryData
+     *
+     * @param database
+     * @param storyId
+     */
+    void deleteStoryData(SQLiteDatabase database, String storyId) {
+        Tracer.debug(TAG, "saveStoryData: " + storyId);
+        database.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COLLUMN_STORY_ID + "= '" + storyId + "'");
+    }
+
+    /**
      * Method to save StoryData
      *
      * @param database
-     * @param storyData locationData of the user
+     * @param storyData
      */
     void saveStoryData(SQLiteDatabase database, StoryData storyData) {
-        Tracer.debug(TAG, "saveStoryData() " + storyData);
+        Tracer.debug(TAG, "deleteStoryData() " + storyData);
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLLUMN_STORY_ID, storyData.getId());
         contentValues.put(COLLUMN_STORY_TITLE, storyData.getTitle());

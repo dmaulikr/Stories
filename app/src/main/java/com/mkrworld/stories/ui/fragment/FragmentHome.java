@@ -56,26 +56,26 @@ public class FragmentHome extends FragmentRecyclerView implements BaseAdapter.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_story_home_offline_stories:
+            case R.id.menu_home_offline_stories:
                 if (getActivity() instanceof OnFragmentRecyclerViewListener) {
                     FragmentOfflineHome fragmentOfflineHome = new FragmentOfflineHome();
                     ((OnFragmentRecyclerViewListener) getActivity()).onFragmentRecyclerViewAddFragmentBackStack(fragmentOfflineHome, FragmentOfflineHome.class.getName());
                 }
                 break;
-            case R.id.menu_story_home_share_app:
+            case R.id.menu_home_share_app:
                 Promotion.shareApp(getContext());
                 break;
-            case R.id.menu_story_home_rate_us:
+            case R.id.menu_home_rate_us:
                 Promotion.sendReview(getContext());
                 break;
-            case R.id.menu_story_home_more_apps:
+            case R.id.menu_home_more_apps:
                 Promotion.getMoreApps(getContext());
                 break;
-            case R.id.menu_story_home_send_feedback:
+            case R.id.menu_home_send_feedback:
                 Promotion.sendFeedback(getContext());
                 break;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

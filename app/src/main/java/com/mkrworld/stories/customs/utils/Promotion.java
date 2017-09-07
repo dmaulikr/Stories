@@ -77,4 +77,25 @@ public class Promotion {
         sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(sendIntent);
     }
+
+    /**
+     * Method to share text
+     *
+     * @param context
+     * @param text    Text to be share
+     */
+    public static void shareText(Context context, String text) {
+        String message = context.getResources().getString(R.string.promotion_share) + " http://play.google.com/store/apps/details?id=" + context.getPackageName();
+        Intent sentIntent = new Intent(Intent.ACTION_SEND);
+        sentIntent.setType("text/plain");
+        sentIntent.putExtra(Intent.EXTRA_SUBJECT, context.getResources().getString(R.string.promotion_publisher_subject));
+        if (text != null && !text.trim().isEmpty()) {
+            sentIntent.putExtra(Intent.EXTRA_TEXT, message + "\n\n\n" + text);
+        } else {
+            sentIntent.putExtra(Intent.EXTRA_TEXT, message);
+        }
+        Intent sendIntent = Intent.createChooser(sentIntent, "Share File");
+        sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(sendIntent);
+    }
 }
