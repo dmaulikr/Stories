@@ -70,7 +70,6 @@ public class AdUtils {
             e.printStackTrace();
             Tracer.error(TAG, "showInterstitialAd() " + e.getMessage());
         }
-
     }
 
     /**
