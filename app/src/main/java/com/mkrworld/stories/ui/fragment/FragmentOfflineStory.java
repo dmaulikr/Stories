@@ -14,6 +14,7 @@ import com.mkrworld.stories.R;
 import com.mkrworld.stories.customs.ui.adapter.AdapterItem;
 import com.mkrworld.stories.customs.ui.adapter.AdapterItemHandler;
 import com.mkrworld.stories.customs.ui.adapter.BaseViewHolder;
+import com.mkrworld.stories.customs.utils.Promotion;
 import com.mkrworld.stories.data.ApplicationDataBase;
 import com.mkrworld.stories.data.StoryData;
 import com.mkrworld.stories.utils.Tracer;
@@ -65,6 +66,15 @@ public class FragmentOfflineStory extends FragmentRecyclerView {
                 if (mStoryId != null && !mStoryId.trim().isEmpty()) {
                     ApplicationDataBase.getInstance(getContext()).deleteStoryData(mStoryId);
                     getActivity().onBackPressed();
+                } else {
+                    Tracer.showSnack(getRecyclerView(), getString(R.string.operation_failed));
+                }
+                break;
+            case R.id.menu_offline_story_share_story:
+                if (mStoryId != null && !mStoryId.trim().isEmpty()) {
+                    StoryData storyData = ApplicationDataBase.getInstance(getContext()).getStoryData(mStoryId);
+                    String text = storyData.getTitle() + "\n\n" + storyData.getDescription();
+                    Promotion.shareText(getContext(), text);
                 } else {
                     Tracer.showSnack(getRecyclerView(), getString(R.string.operation_failed));
                 }
