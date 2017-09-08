@@ -27,7 +27,7 @@ android {
             buildConfigField BOOLEAN, SHOW_LOG, TRUE
         }
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField STRING, BASE_TAG, "\"MkrWorld.Stories\""
             buildConfigField STRING, BASE_TAG, "\"MkrWorld.Stories\""
