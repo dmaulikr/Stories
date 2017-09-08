@@ -1,28 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/adapter_story_title_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="@dimen/adapter_story_outer_padding">
+    android:layout_marginBottom="@dimen/adapter_card_margin_ver"
+    android:layout_marginLeft="@dimen/adapter_card_margin_hor"
+    android:layout_marginRight="@dimen/adapter_card_margin_hor"
+    android:layout_marginTop="@dimen/adapter_card_margin_ver"
+    app:cardCornerRadius="@dimen/adapter_card_corner"
+    app:contentPaddingBottom="@dimen/adapter_card_content_padding_ver"
+    app:contentPaddingLeft="@dimen/adapter_card_content_padding_hor"
+    app:contentPaddingRight="@dimen/adapter_card_content_padding_hor"
+    app:contentPaddingTop="@dimen/adapter_card_content_padding_ver">
 
-    <TextView
-        android:id="@+id/adapter_story_textView_story_title"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/app_name"
-        android:textColor="@color/adapter_story_text_color"
-        android:textSize="@dimen/adapter_story_text_size_title"
-        android:textStyle="bold" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/adapter_story_textView_story"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/adapter_story_content_margin"
-        android:text="@string/app_name"
-        android:textColor="@color/adapter_story_text_color"
-        android:textSize="@dimen/adapter_story_text_size_content" />
+        <TextView
+            android:id="@+id/adapter_story_textView_story_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/adapter_story_text_color"
+            android:textSize="@dimen/adapter_story_text_size_title"
+            android:textStyle="bold" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/adapter_story_textView_story"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/adapter_story_content_margin"
+            android:text="@string/app_name"
+            android:textColor="@color/adapter_story_text_color"
+            android:textSize="@dimen/adapter_story_text_size_content" />
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

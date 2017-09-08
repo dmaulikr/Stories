@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.google.android.gms.ads.AdView;
 import com.mkrworld.stories.BuildConfig;
 import com.mkrworld.stories.R;
 import com.mkrworld.stories.controller.FetchAppConfigController;
@@ -14,12 +15,15 @@ import com.mkrworld.stories.ui.fragment.FragmentBase;
 import com.mkrworld.stories.ui.fragment.FragmentHome;
 import com.mkrworld.stories.ui.fragment.FragmentOfflineHome;
 import com.mkrworld.stories.ui.fragment.FragmentRecyclerView;
+import com.mkrworld.stories.utils.AdUtils;
 import com.mkrworld.stories.utils.Tracer;
 
 
 public class MainActivity extends AppCompatActivity implements AppPermissionController.OnAppPermissionControllerListener, FetchAppConfigController.OnFetchAppConfigControllerListener, FragmentRecyclerView.OnFragmentRecyclerViewListener {
     private static final String TAG = BuildConfig.BASE_TAG + ".MainActivity";
     private AppPermissionController mAppPermissionController;
+    private AdUtils mAdUtils;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements AppPermissionCont
         setSupportActionBar(toolbar);
         mAppPermissionController = new AppPermissionController(this, this);
         mAppPermissionController.initializedAppPermission();
+        mAdUtils = new AdUtils(this);
+        mAdUtils.initInterstitialAdd();
+        mAdUtils.showBannerAd((AdView) findViewById(R.id.activity_main_adView), findViewById(R.id.activity_main_container_adView));
     }
 
     @Override
@@ -41,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements AppPermissionCont
             if (fragment != null && fragment instanceof FragmentBase) {
                 ((FragmentBase) fragment).onFragmentReloadFromBackStack();
             }
+            mAdUtils.showInterstitialAd();
         }
         if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
             finish();
@@ -64,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements AppPermissionCont
     public void onFetchAppConfigSuccess() {
         Tracer.debug(TAG, "onFetchAppConfigSuccess: ");
         getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_fragment_container, new FragmentHome(), FragmentHome.class.getName()).addToBackStack(FragmentHome.class.getName()).commit();
+        mAdUtils.showInterstitialAd();
     }
 
     @Override
@@ -80,5 +89,6 @@ public class MainActivity extends AppCompatActivity implements AppPermissionCont
         if (fragmentByTag == null) {
             getSupportFragmentManager().beginTransaction().add(R.id.activity_main_fragment_container, fragment, tag).addToBackStack(tag).commit();
         }
+        mAdUtils.showInterstitialAd();
     }
 }

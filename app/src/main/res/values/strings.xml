@@ -1,4 +1,6 @@
 <resources>
+    <string name="banner_ad_id">ca-app-pub-8713916254370167/4963143496</string>
+    <string name="interstitial_ad_id">ca-app-pub-8713916254370167/1786315818</string>
     <string name="app_name">Stories</string>
     <string name="title_stories">Stories</string>
     <string name="title_offline_stories">Offline Stories</string>

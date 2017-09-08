@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/adapter_story_title_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="@dimen/adapter_story_title_outer_padding">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberPassword"
-        android:text="X"
-        android:textColor="@color/adapter_story_title_text_color"
-        android:textSize="@dimen/adapter_story_title_text_size" />
+    android:layout_marginBottom="@dimen/adapter_card_margin_ver"
+    android:layout_marginLeft="@dimen/adapter_card_margin_hor"
+    android:layout_marginRight="@dimen/adapter_card_margin_hor"
+    android:layout_marginTop="@dimen/adapter_card_margin_ver"
+    app:cardCornerRadius="@dimen/adapter_card_corner"
+    app:contentPaddingLeft="@dimen/adapter_card_content_padding_hor"
+    app:contentPaddingRight="@dimen/adapter_card_content_padding_hor"
+    app:contentPaddingTop="@dimen/adapter_card_content_padding_ver"
+    app:contentPaddingBottom="@dimen/adapter_card_content_padding_ver">
 
     <TextView
         android:id="@+id/adapter_story_title_textView_story_title"
@@ -22,5 +22,4 @@
         android:text="@string/app_name"
         android:textColor="@color/adapter_story_title_text_color"
         android:textSize="@dimen/adapter_story_title_text_size" />
-
-</LinearLayout>
+</android.support.v7.widget.CardView>

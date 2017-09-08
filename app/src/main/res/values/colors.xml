@@ -5,7 +5,7 @@
     <color name="colorAccent">@android:color/white</color>
     <color name="toolbar_back">@color/colorPrimary</color>
     <color name="toolbar_text_color">@android:color/white</color>
-
+    <color name="recycler_view_bg">#DFDFDF</color>
     <!-- FRAGMENT HOME -->
     <color name="fragment_home_bg_color">#EEEEEE</color>
     <!-- FRAGMENT STORY_TEXT -->
