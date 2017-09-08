@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements AppPermissionCont
             if (fragment != null && fragment instanceof FragmentBase) {
                 ((FragmentBase) fragment).onFragmentReloadFromBackStack();
             }
-            mAdUtils.showInterstitialAd();
         }
         if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
             finish();
