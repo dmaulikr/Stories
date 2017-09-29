@@ -27,4 +27,10 @@
     <string name="menu_option_offline_story_remove_story">Remove Story</string>
     <string name="menu_option_story_share_story">Share Story</string>
 
+    <!-- DIALOG - UPDATE -->
+    <string name="dialog_upgrade_dialog_title">App Update</string>
+    <string name="dialog_upgrade_dialog_message">A new update is available, please try new version</string>
+    <string name="dialog_upgrade_dialog_positive">Yes</string>
+    <string name="dialog_upgrade_dialog_negative">No</string>
+
 </resources>

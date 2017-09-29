@@ -2,6 +2,7 @@ package com.mkrworld.stories.ui.fragment;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -25,7 +26,9 @@ import java.util.ArrayList;
 
 public class FragmentOfflineHome extends FragmentRecyclerView {
 
+    public static final String EXTRA_IS_NETWORK_FAILED = "EXTRA_IS_NETWORK_FAILED";
     private static final String TAG = BuildConfig.BASE_TAG + ".FragmentOfflineHome";
+    public static final int SNACK_BAR_DELAY = 4000;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -82,7 +85,18 @@ public class FragmentOfflineHome extends FragmentRecyclerView {
         }
         getBaseAdapter().updateAdapterItemList(adapterItemArrayList);
         if (storyDataList.size() == 0) {
-            Tracer.showSnack(getRecyclerView(), getString(R.string.no_saved_story_found));
+            if (getArguments() != null && getArguments().getBoolean(EXTRA_IS_NETWORK_FAILED, false)) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (getView() != null && getActivity() != null) {
+                            Tracer.showSnack(getRecyclerView(), getString(R.string.no_saved_story_found));
+                        }
+                    }
+                }, SNACK_BAR_DELAY);
+            } else {
+                Tracer.showSnack(getRecyclerView(), getString(R.string.no_saved_story_found));
+            }
         }
     }
 }

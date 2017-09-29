@@ -89,6 +89,6 @@ public class AdUtils {
      */
     private AdRequest getAdRequest() {
         Tracer.debug(TAG, "getAdRequest()");
-        return new AdRequest.Builder().build();
+        return new AdRequest.Builder().addTestDevice("1C8EA95E180D6E7ADE83F2AD9C8BE1B4").build();
     }
 }

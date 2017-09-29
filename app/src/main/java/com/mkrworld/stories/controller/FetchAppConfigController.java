@@ -65,7 +65,7 @@ public class FetchAppConfigController implements FirebaseUtils.OnFirebaseListene
         mProgressDialog.dismiss();
         try {
             int appVer = Integer.parseInt("" + dataSnapshot.child(APP_VER).getValue());
-            PreferenceDataUtils.setLatestVersion(mContext, appVer);
+            PreferenceDataUtils.setLatestVersion(mContext, 5);
         } catch (Exception e) {
             Tracer.error(TAG, "onFirebaseConfigFetchSuccess(APP_VER)" + e.getMessage());
         }

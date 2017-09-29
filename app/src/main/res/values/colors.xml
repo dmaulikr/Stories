@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#ed1c24</color>
     <color name="colorPrimaryDark">#FFCB161C</color>
-    <color name="colorAccent">@android:color/white</color>
+    <color name="colorAccent">@color/colorPrimary</color>
     <color name="toolbar_back">@color/colorPrimary</color>
     <color name="toolbar_text_color">@android:color/white</color>
     <color name="recycler_view_bg">#DFDFDF</color>

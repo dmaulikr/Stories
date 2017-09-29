@@ -3,8 +3,6 @@ package com.mkrworld.stories.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 
 import com.mkrworld.stories.BuildConfig;
 
@@ -28,15 +26,9 @@ public class PreferenceDataUtils {
      * @param context
      * @return
      */
-    public static int getAppVersionCode(Context context) {
-        Tracer.debug(TAG, "getAppVersionCode()");
-        try {
-            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-            return getShearedPreference(context).getInt(LATEST_VER_CODE, packageInfo.versionCode);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return 1;
+    public static int getLatestVersionCode(Context context) {
+        Tracer.debug(TAG, "getLatestVersionCode()");
+        return getShearedPreference(context).getInt(LATEST_VER_CODE, Utils.getAppVersionCode(context));
     }
 
     /**
@@ -47,7 +39,7 @@ public class PreferenceDataUtils {
      */
     public static void setLatestVersion(Context context, int versionOnFirebase) {
         Tracer.debug(TAG, "setLatestVersion()" + versionOnFirebase);
-        if (versionOnFirebase > getAppVersionCode(context)) {
+        if (versionOnFirebase > getLatestVersionCode(context)) {
             getShearedPreferenceEditor(context).putInt(LATEST_VER_CODE, versionOnFirebase).commit();
         }
     }
