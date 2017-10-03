@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/menu_offline_story_font_size"
+        android:title="@string/menu_option_home_font_size"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/menu_offline_story_remove_story"
         android:title="@string/menu_option_offline_story_remove_story"
         app:showAsAction="never" />
@@ -9,5 +13,4 @@
         android:id="@+id/menu_offline_story_share_story"
         android:title="@string/menu_option_story_share_story"
         app:showAsAction="never" />
-
 </menu>

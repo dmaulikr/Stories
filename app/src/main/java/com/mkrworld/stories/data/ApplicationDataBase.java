@@ -19,6 +19,7 @@ public class ApplicationDataBase extends SQLiteOpenHelper {
     private static ApplicationDataBase mApplicationDataBase;
     private static Context mContext;
     private TableStoryData mTableStoryData;
+    private TableViewedStoryTitle mTableViewedStoryTitle;
 
     /**
      * Get the instance of DataHelper
@@ -38,12 +39,14 @@ public class ApplicationDataBase extends SQLiteOpenHelper {
         super(context, APP_DB, null, 1);
         Tracer.debug(TAG, "ApplicationDataBase()");
         mTableStoryData = TableStoryData.getInstance(context);
+        mTableViewedStoryTitle = TableViewedStoryTitle.getInstance(context);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         Tracer.debug(TAG, "onCreate()");
         mTableStoryData.createTable(db);
+        mTableViewedStoryTitle.createTable(db);
     }
 
     @Override
@@ -54,6 +57,7 @@ public class ApplicationDataBase extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         mTableStoryData.onUpgrade(db);
+        mTableViewedStoryTitle.onUpgrade(db);
     }
 
     //=============================================================================================
@@ -112,5 +116,26 @@ public class ApplicationDataBase extends SQLiteOpenHelper {
     public void deleteStoryData(String storyId) {
         Tracer.debug(TAG, "deleteStoryData() " + storyId);
         mTableStoryData.deleteStoryData(getWritableDatabase(), storyId);
+    }
+
+    /**
+     * Method to check weather this story is aleady read by the user or not
+     *
+     * @param storyId  unique story_id
+     * @return
+     */
+    public boolean isContainStoryId(String storyId) {
+        Tracer.debug(TAG, "isContainStoryId() " + storyId);
+        return mTableViewedStoryTitle.isContainStoryId(getReadableDatabase(), storyId);
+    }
+
+    /**
+     * Method to save the Story Id which is read by the user
+     *
+     * @param storyId
+     */
+    public void saveStoryTitleId(String storyId) {
+        Tracer.debug(TAG, "saveStoryTitleId: " + storyId);
+        mTableViewedStoryTitle.saveStoryTitleId(getWritableDatabase(), storyId);
     }
 }

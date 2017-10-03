@@ -1,6 +1,7 @@
 package com.mkrworld.stories.ui.fragment;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,9 @@ import com.mkrworld.stories.customs.ui.adapter.BaseViewHolder;
 import com.mkrworld.stories.customs.utils.Promotion;
 import com.mkrworld.stories.data.ApplicationDataBase;
 import com.mkrworld.stories.data.StoryData;
+import com.mkrworld.stories.utils.Constants;
+import com.mkrworld.stories.utils.DialogUtils;
+import com.mkrworld.stories.utils.PreferenceDataUtils;
 import com.mkrworld.stories.utils.Tracer;
 
 import java.util.ArrayList;
@@ -78,6 +82,26 @@ public class FragmentOfflineStory extends FragmentRecyclerView {
                 } else {
                     Tracer.showSnack(getRecyclerView(), getString(R.string.operation_failed));
                 }
+                break;
+            case R.id.menu_offline_story_font_size:
+                DialogUtils.dismissCurrentDialog();
+                String title = getString(R.string.dialog_font_size_title);
+                String message = getString(R.string.dialog_font_size_message);
+                String okText = getString(R.string.dialog_upgrade_dialog_positive);
+                String cancelText = getString(R.string.dialog_upgrade_dialog_negative);
+                DialogUtils.showFontSize(getActivity(), Constants.DIALOG_FONT_MAX_INDEX, PreferenceDataUtils.getStoryTextSizePer(getActivity()) - Constants.DIALOG_FONT_TRASH_HOLD, Constants.DIALOG_FONT_TRASH_HOLD, title, message, okText, cancelText, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        PreferenceDataUtils.setStoryTextSizePer(getContext(), i);
+                        getBaseAdapter().notifyDataSetChanged();
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).show();
                 break;
         }
         return super.onOptionsItemSelected(item);

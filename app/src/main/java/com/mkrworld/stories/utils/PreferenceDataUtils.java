@@ -15,6 +15,7 @@ public class PreferenceDataUtils {
     private static String STORY_MAX_COUNT = "STORY_MAX_COUNT";
     private static String STORY_MIN_COUNT = "STORY_MIN_COUNT";
     private static String STORY_PAGE_COUNT = "STORY_PAGE_COUNT";
+    private static String STORY_TEXT_SIZE_PER = "STORY_TEXT_SIZE_PER";
 
     //==================================================================================================================
     //==================================================================================================================
@@ -106,6 +107,29 @@ public class PreferenceDataUtils {
         Tracer.debug(TAG, "setStoryPageCount()" + storyPageCount);
         getShearedPreferenceEditor(context).putInt(STORY_PAGE_COUNT, storyPageCount).commit();
     }
+
+    /**
+     * Method to get the story text size in per
+     *
+     * @param context
+     */
+    public static int getStoryTextSizePer(Context context) {
+        Tracer.debug(TAG, "getStoryTextSizePer()");
+        return getShearedPreference(context).getInt(STORY_TEXT_SIZE_PER, Constants.DIALOG_FONT_DEFAULT_INDEX);
+    }
+
+    /**
+     * Method to set the story text size in per
+     *
+     * @param context
+     * @param storyMaxCount Story max count
+     */
+    public static void setStoryTextSizePer(Context context, int storyMaxCount) {
+        Tracer.debug(TAG, "setStoryTextSizePer()" + storyMaxCount);
+        getShearedPreferenceEditor(context).putInt(STORY_TEXT_SIZE_PER, storyMaxCount).commit();
+    }
+
+
 
     //==================================================================================================================
     //==================================================================================================================

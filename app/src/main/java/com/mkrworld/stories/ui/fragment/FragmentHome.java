@@ -151,5 +151,6 @@ public class FragmentHome extends FragmentRecyclerView implements BaseAdapter.On
         if (getActivity() instanceof AppCompatActivity) {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.title_stories));
         }
+        getBaseAdapter().notifyDataSetChanged();
     }
 }

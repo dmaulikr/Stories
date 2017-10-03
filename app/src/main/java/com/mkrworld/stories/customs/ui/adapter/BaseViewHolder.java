@@ -18,7 +18,7 @@ public abstract class BaseViewHolder<V> extends RecyclerView.ViewHolder implemen
         mParent = itemView;
     }
 
-    public View getmParent() {
+    public View getParent() {
         return mParent;
     }
 

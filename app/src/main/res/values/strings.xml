@@ -18,6 +18,7 @@
     <string name="promotion_share">Share this app with your friends, if you really like it.</string>
 
     <!-- MENU OPTION HOME -->
+    <string name="menu_option_home_font_size">Text Size</string>
     <string name="menu_option_home_offline_story">Offline Story</string>
     <string name="menu_option_home_share_app">Share App</string>
     <string name="menu_option_home_rate_us">Rate Us</string>
@@ -32,5 +33,9 @@
     <string name="dialog_upgrade_dialog_message">A new update is available, please try new version</string>
     <string name="dialog_upgrade_dialog_positive">Yes</string>
     <string name="dialog_upgrade_dialog_negative">No</string>
+
+    <!-- DIALOG FONT -->
+    <string name="dialog_font_size_title">Font Size</string>
+    <string name="dialog_font_size_message">Scale the size text size and make it easy to read.....</string>
 
 </resources>

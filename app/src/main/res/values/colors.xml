@@ -12,6 +12,8 @@
     <color name="fragment_story_bg_color">#EEEEEE</color>
     <!-- ADAPTER STORY_TEXT TITLE -->
     <color name="adapter_story_title_text_color">@android:color/black</color>
+    <color name="adapter_story_title_text_color_old">#666666</color>
     <!-- ADAPTER STORY_TEXT -->
-    <color name="adapter_story_text_color">@android:color/black</color>
+    <string name="adapter_story_text_color">#000000</string>
+    <string name="adapter_story_text_title_color">#470024</string>
 </resources>

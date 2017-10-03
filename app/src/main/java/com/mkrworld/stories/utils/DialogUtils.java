@@ -5,6 +5,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Build;
+import android.view.View;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.mkrworld.stories.BuildConfig;
 import com.mkrworld.stories.R;
@@ -67,7 +70,77 @@ public class DialogUtils {
                         }
                     }
                 });
-        return builder.create();
+        return mCurrentDialog = builder.create();
+    }
+
+    /**
+     * Method top show font size dialog, But not shown
+     *
+     * @param activity
+     * @param maxIndex
+     * @param currentIndex
+     * @param trashHold
+     * @param titleText
+     * @param okText
+     * @param cancelText
+     * @param okOnClickListener
+     * @param cancelOnClickListener
+     * @return
+     */
+    public static Dialog showFontSize(Activity activity, int maxIndex, int currentIndex, final int trashHold, String titleText, String message, String okText, String cancelText, final DialogInterface.OnClickListener okOnClickListener, final DialogInterface.OnClickListener cancelOnClickListener) {
+        final AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(activity, android.R.style.Theme_Material_Light_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(activity);
+        }
+        builder.setTitle(titleText);
+        builder.setMessage(message);
+        View parentView = activity.getLayoutInflater().inflate(R.layout.dialog_seek, null);
+        builder.setView(parentView);
+        final SeekBar seek = (SeekBar) parentView.findViewById(R.id.dialog_seek_seekBar);
+        seek.setMax(maxIndex);
+        final TextView text = (TextView) parentView.findViewById(R.id.dialog_seek_textView);
+        seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                text.setText("" + (progress + trashHold) + " %");
+            }
+        });
+        seek.setProgress(currentIndex);
+        builder.setPositiveButton(okText, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (okOnClickListener != null) {
+                    okOnClickListener.onClick(dialog, seek.getProgress() + trashHold);
+                } else {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.setNegativeButton(cancelText, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (cancelOnClickListener != null) {
+                    cancelOnClickListener.onClick(dialog, which);
+                } else {
+                    dialog.dismiss();
+                }
+            }
+        });
+        return mCurrentDialog = builder.create();
     }
 
     /**
